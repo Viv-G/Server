@@ -55,7 +55,7 @@ void MLS(double rad, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled, pcl:
 	mls.process(*mls_points);
 }
 
-void estNormals(double neRad = 0.05, pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points, pcl::PointCloud<pcl::Normal>::Ptr cloud_normals){
+void estNormals(double neRad, pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points, pcl::PointCloud<pcl::Normal>::Ptr cloud_normals){
 	pcl::NormalEstimationOMP<pcl::PointXYZ, pcl::Normal> ne;
 	ne.setNumberOfThreads (2);
 	ne.setInputCloud(mls_points);
@@ -356,7 +356,7 @@ main (int argc, char** argv)
 	 			cloud_downsampled->width = cloud_downsampled->height = 0;
 	 			cloud_downsampled->clear();
 
-				downSample(radDown, minNei, cloud, cloud_downsampled);
+				FilterPoints(radDown, minNei, cloud, cloud_downsampled);
 	 			end_time = pcl::getTime ();
 	 			elapsed_rad = end_time - start_time;
 	 		}
