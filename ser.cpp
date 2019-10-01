@@ -205,10 +205,8 @@ main (int argc, char** argv)
 	std::istream is(&buf);
 	std::getline(is, data);
 
-//	cout << data << endl;
 	std::stringstream ssNum(data);
 	ssNum >> numPoints;
-//	cout << "Number of Points: " << numPoints << endl;
 
 // Scale Point Cloud 
 	cloud->width = numPoints;
@@ -239,67 +237,13 @@ main (int argc, char** argv)
 	Eigen::Vector4f centroid;
   	compute3DCentroid(*cloud, centroid);
 
-/*	if (cloud->points.size() > ptStart)
-	{
-	///////////////FILTER//////////////
-	  	if (cloud->points.size() > ftStart){
-	 	start_time = pcl::getTime ();
-		FilterPoints(radDown, minNei, cloud, cloud_downsampled);
-	 	end_time = pcl::getTime ();
-	 	elapsed_rad = end_time - start_time;
-	 	std::cout << "Success... Reduced from " << cloud->points.size() << " to " << cloud_downsampled->points.size() << std::endl;
-	}
-	///////////////////////////////////////
-
-	/////////////MLS SMOOTHING////////////
-	 	start_time = pcl::getTime();
-	 	MLS(rad, cloud_downsampled, mls_points);
-	  	end_time = pcl::getTime ();
-	  	elapsed_mlsNoNormal = end_time - start_time;
-	  	std::cout << "Smothed Points Now " << mls_points->points.size() <<" - Starting Normal Estimation...\n" << std::endl;
-	  
-	//////////////////////////////////////
-
-
-	////////////EST NORMALS//////////////
-	  	start_time = pcl::getTime();
-		estNormals(neRad, mls_points, cloud_normals);
-		pcl::concatenateFields(*mls_points,*cloud_normals, *cloud_point_normals);
-		end_time = pcl::getTime ();
-		elapsed_Normal = end_time - start_time;
-		std::cout << "Calculated Normals - Starting Poisson Meshing...\n";
-	////////////////////////////////////
-
-	///////////////MESHING//////////////
-		start_time = pcl::getTime();
-		pcl::Poisson<pcl::PointNormal> poisson;
-		poisson.setDepth(depth);
-		poisson.setInputCloud(cloud_point_normals);
-		poisson.reconstruct(*mesh);
-		end_time = pcl::getTime ();
-		elapsed_Mesh = end_time - start_time;
-	/////////////////////////////////////
-	} */
-
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 	viewer = boost::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer");
 	viewer->setSize(3260, 2100);
 	//viewer->setFullScreen(true);
 	//viewer->createInteractor();
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(cloud, 0, 255, 0);
- // boost::shared_ptr::pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
   	viewer->setBackgroundColor (0, 0, 0);
- /* 	if (cloud->points.size() > ptStart )
-	{ 
-		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, "Output");
-		viewer->addPolygonMesh(*mesh,"Poisson"); 
-
-	}
-	else 
-	{
-		viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color, "Output");
-	}
-*/
   	viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color, "Output");
   	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"Output");
   	viewer->setCameraPosition(camPos[0],camPos[1],camPos[2], centroid[0], centroid[1], centroid[2], 0,1,0);
