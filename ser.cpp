@@ -12,9 +12,8 @@
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
 //Filters
-#include <pcl/filters/passthrough.h>
-#include <pcl/filters/voxel_grid.h>
 #include <pcl/filters/radius_outlier_removal.h>
+#include <pcl/filters/statistical_outlier_removal.h>
 
 //Surfaces
 #include <pcl/surface/mls.h>
@@ -26,7 +25,6 @@
 #include <pcl/io/vtk_io.h>
 //Visualize
 #include <pcl/visualization/pcl_visualizer.h>
-//#include <pcl/visualization/cloud_viewer.h>
 
 
 using boost::asio::ip::tcp;
@@ -74,10 +72,20 @@ void estNormals(double neRad, pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points, pc
 
 }
 
-void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
+void statOutlier (int mK, double stdDev, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh){
+	// S t a t i s t i c a l O u t l i e r Removal
+	pcl::StatisticalOutlierRemoval<pcl::PointNormal> sor;
+	sor.setInputCloud(cloud_point_normals);
+	sor.setMeanK(mK);
+	sor.setStddevMulThresh(stdDev);
+	sor.filter(*preMesh);
+}
+
+//void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
+void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh){	
 		pcl::Poisson<pcl::PointNormal> poisson;
 		poisson.setDepth(depth);
-		poisson.setInputCloud(cloud_point_normals);
+		poisson.setInputCloud(preMesh);
 		poisson.reconstruct(*mesh);
 		}
 
@@ -131,6 +139,8 @@ main (int argc, char** argv)
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals;
 	cloud_point_normals = boost::make_shared<pcl::PointCloud<pcl::PointNormal>>();
 
+	pcl::PointCloud<pcl::PointNormal>::Ptr preMesh;
+	preMesh = boost::make_shared<pcl::PointCloud<pcl::PointNormal>>();
 
 	pcl::PolygonMesh::Ptr mesh;
 	mesh = boost::make_shared<pcl::PolygonMesh>();
@@ -183,6 +193,10 @@ main (int argc, char** argv)
 
 	///////Normal Estimation///////
 	double neRad = 0.05; // 0.05
+
+	///////STATISTICAL OUTLIER REMOVAL//////
+	int mK = 50; //Set the number of nearest neighbors to use for mean distance estimation.
+	double stdDev = 1.0; //Set the standard deviation multiplier for the distance threshold calculation.
 
 	///////MESHING////////////
 	int depth = 6;
@@ -392,6 +406,10 @@ main (int argc, char** argv)
 			end_time = pcl::getTime ();
 			elapsed_Normal = end_time - start_time;
 			////////////////////////////////////
+
+
+			//////////// REMOVE FINAL OUTLIERS ////////////
+			statOutlier(mK,stdDev, cloud_point_normals, preMesh);
 		
 
 			///////////////MESHING//////////////
@@ -399,7 +417,8 @@ main (int argc, char** argv)
 			{
 				start_time = pcl::getTime();
 				/// CLEAR POINT CLOUDS /////
-				meshReconstruct(depth, cloud_point_normals, mesh);
+			//	meshReconstruct(depth, cloud_point_normals, mesh);
+				meshReconstruct(depth, preMesh, mesh);
 				end_time = pcl::getTime ();
 				elapsed_Mesh = end_time - start_time;
 			}
