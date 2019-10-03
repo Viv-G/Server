@@ -1,0 +1,28 @@
+NOTES:
+
+View both point clouds - pcl_viewer -multiview 1 pointsFilt.pcd points.pcd -normals 1/10
+
+v1 - 
+mK = 15
+stdDev = 1
+
+Removed 5613 - 5292
+
+Groups of about 15 - 50 points floating on line of table surface.
+
+v2 
+mK = 25
+stdDev = 1
+
+changed normals to 0.03
+
+Removed 5215 - 4979
+
+Removed way more of the outside floating groups, 1 distinct group / line where shadow of box was.
+
+v3 
+mk = 50
+stdDev = 1
+normals still 0.03
+
+Removed: 

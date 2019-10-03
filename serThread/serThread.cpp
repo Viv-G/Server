@@ -8,6 +8,7 @@
 #include <mutex>
 #include <thread>
 #include <vector> 
+#include <atomic>
 //Points
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
@@ -32,6 +33,9 @@ using namespace std::chrono_literals;
 using std::string;
 using std::cout;
 using std::endl;
+
+std::atomic<bool> update(false);
+boost::mutex updateModelMutex;
 
 void FilterPoints(double radDown, int minNei, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled){
   // create passthrough filter instance
@@ -82,11 +86,19 @@ void statOutlier (int mK, double stdDev, pcl::PointCloud<pcl::PointNormal>::Ptr 
 }
 
 //void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
-void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh){	
+void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh){
+		double start_time = pcl::getTime();
 		pcl::Poisson<pcl::PointNormal> poisson;
 		poisson.setDepth(depth);
 		poisson.setInputCloud(preMesh);
-		poisson.reconstruct(*mesh);
+		poisson.reconstruct(*updateMesh);
+		boost::mutex::scoped_lock updateLock(updateModelMutex);
+		*mesh = *updateMesh;
+		update = true;
+		double end_time = pcl::getTime ();
+		double meshTime = end_time - start_time;
+		cout << "MESH-\tMesh Time: " << meshTime << endl;
+		cout << "MESH-\tPointCloud Size: " << preMesh->points.size() << endl;
 		}
 
 void send_(tcp::socket & socket, const string& message){
@@ -119,10 +131,27 @@ main (int argc, char** argv)
 	pcl::console::parse_argument (argc, argv, "-port", port);
 
 // Create Empty Point Cloud
-	//pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ> ());
+//	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ> ());
 //	pcl::PointCloud<pcl::PointXYZ> cloud, cloudTemp;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ> ());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudTemp (new pcl::PointCloud<pcl::PointXYZ> ());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled (new pcl::PointCloud<pcl::PointXYZ> ());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points (new pcl::PointCloud<pcl::PointXYZ> ());
+	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal> ());
+	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals (new pcl::PointCloud<pcl::PointNormal> ());
+	pcl::PointCloud<pcl::PointNormal>::Ptr preMesh (new pcl::PointCloud<pcl::PointNormal> ());
+	pcl::PolygonMesh::Ptr mesh (new pcl::PolygonMesh());
+	pcl::PolygonMesh::Ptr updateMesh (new pcl::PolygonMesh());
+
+	double meshTime = 0;
+
+	boost::thread meshThread;
+
+
+	/*pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
 	cloud = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
+
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudTemp;
 	cloudTemp = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
 
@@ -144,6 +173,9 @@ main (int argc, char** argv)
 
 	pcl::PolygonMesh::Ptr mesh;
 	mesh = boost::make_shared<pcl::PolygonMesh>();
+
+	pcl::PolygonMesh::Ptr updateMesh;
+	updateMesh = boost::make_shared<pcl::PolygonMesh>(); */
 
 
 // Create new io service
@@ -170,7 +202,7 @@ main (int argc, char** argv)
 	double HandlePoints_Time;
 	double handleTrack;
 	double elapsed_crop, elapsed_vox, elapsed_mls, elapsed_mlsNoNormal, elapsed_Normal, elapsed_Mesh, elapsed_rad = 0;
-	int readINT;
+	int readINT, meshINT = 0;
 	int counter = 0;
 	////////POINT READING VARIABLES/////////
 	int numPoints = 0;
@@ -192,10 +224,10 @@ main (int argc, char** argv)
 	double rad = 0.05;
 
 	///////Normal Estimation///////
-	double neRad = 0.03; // 0.05
+	double neRad = 0.05; // 0.05
 
 	///////STATISTICAL OUTLIER REMOVAL//////
-	int mK = 50; //Set the number of nearest neighbors to use for mean distance estimation.
+	int mK = 75; //Set the number of nearest neighbors to use for mean distance estimation.
 	double stdDev = 1.0; //Set the standard deviation multiplier for the distance threshold calculation.
 
 	///////MESHING////////////
@@ -283,6 +315,10 @@ main (int argc, char** argv)
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
 	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+	  		if(meshThread.joinable())
+			{
+				meshThread.join();
+			}
 	  		return 0;
 		}
 		std::getline(is, data);
@@ -302,6 +338,11 @@ main (int argc, char** argv)
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
 	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+
+	  		if(meshThread.joinable())
+			{
+				meshThread.join();
+			}
   		return 0;
 		}
 
@@ -361,9 +402,10 @@ main (int argc, char** argv)
 		elapsed_time = 0;
 
 
-
-		if (cloud->points.size() > ptStart)
+		if ((cloudSize_new != cloudSize_old) && cloud->points.size() > ptStart) // ONLY RE-MESH IF CLOUD HAS BEEN UPDATED
 		{
+	//	if (cloud->points.size() > ptStart)
+	//	{
 			///////////////DOWNSAMPLE//////////////
 		  	if (cloud->points.size() > ftStart)
 		  	{
@@ -415,33 +457,61 @@ main (int argc, char** argv)
 		
 
 			///////////////MESHING//////////////
-			if (cloudSize_new != cloudSize_old) // ONLY RE-MESH IF CLOUD HAS BEEN UPDATED
-			{
+//			if ((cloudSize_new != cloudSize_old) && cloud->points.size() > ptStart) // ONLY RE-MESH IF CLOUD HAS BEEN UPDATED
+//			{	
+				if(meshThread.joinable())
+				{	start_time = pcl::getTime();
+					meshThread.join();
+					end_time = pcl::getTime ();
+					elapsed_Mesh = end_time - start_time;
+					cout << "PAUSE-\tWaited for: " << elapsed_Mesh << " seconds" << endl;
+					cout << "PAUSE-\tPointCloud Size: " << cloudSize_new << endl;
+				}
 				start_time = pcl::getTime();
 				/// CLEAR POINT CLOUDS /////
 			//	meshReconstruct(depth, cloud_point_normals, mesh);
-				meshReconstruct(depth, preMesh, mesh);
+			//	boost::thread meshThread(meshReconstruct, depth, preMesh, mesh, updateMesh);
+			//	meshReconstruct(depth, preMesh, mesh, updateMesh);
+				meshThread = boost::thread(meshReconstruct, depth, preMesh, mesh, updateMesh);
 				end_time = pcl::getTime ();
 				elapsed_Mesh = end_time - start_time;
-			}
-			/////////////////////////////////////
+				meshINT++;
 		}
+			/////////////////////////////////////
+	//	}
 
 		/////////////VIEWER////////////////////////////
-    	viewer->removeAllPointClouds();
-    	if (cloud->points.size() > ptStart )
-		{ 
-//			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
-			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
+		if (update){
+			viewer->removeAllPointClouds();
+			if (cloud->points.size() > ptStart )
+			{ 
+			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
     		viewer->addPolygonMesh(*mesh,"Poisson");
-//    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output");
-    		viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output");
-  		}
-  		else 
-  		{	
+    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output");
+  			}
+  			else 
+  			{	
   			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 0, 255, 0);
   			viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "Output");
-  		}
+  			}
+  			update = false;
+		}
+		else 
+		{
+			viewer->removePointCloud("Output");
+
+			if (cloud->points.size() > ptStart )
+			{ 
+			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
+    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output");
+  			}
+  			else 
+  			{	
+  			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 0, 255, 0);
+  			viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "Output");
+  			}
+		}
+
      	viewer->setCameraPosition(camPos[0],camPos[1],camPos[2], centroid[0], centroid[1], centroid[2], 0,1,0);
      	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"Output");
 	 	viewer->spinOnce();
@@ -455,9 +525,11 @@ main (int argc, char** argv)
           	double readNumAv = readNumTrack / readINT;
           	double readPointAv = readPointTrack / readINT;
           	double handleAv = handleTrack / readINT;
+          	double meshAV = elapsed_Mesh / meshINT;
           	cout << "\tRead Num Points Average Time: " << readNumAv << endl;
           	cout << "\tRead Points In Average Time: " << readPointAv << endl;
           	cout << "\tHandle PointCloud Average Time: " << handleAv << endl;
+          	cout << "\tMesh Average Time: " << handleAv << endl;
 
           	double frames_per_second = counter / elapsed_time;
           	start_time_master = new_time;
@@ -466,10 +538,14 @@ main (int argc, char** argv)
           	cout << "\tCloud Size: " << cloudSize_new << endl;
         }
         ////////////////////////////////////////////////////
-
+    //    meshThread.join();
 	}
     pcl::io::savePCDFile ("Points.pcd", *cloud);
-    pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
     pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+
+	if(meshThread.joinable())
+		{
+		meshThread.join();
+		}
     return (0);
 }

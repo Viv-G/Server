@@ -33,6 +33,9 @@ using std::string;
 using std::cout;
 using std::endl;
 
+bool update;
+boost::mutex updateModelMutex;
+
 void FilterPoints(double radDown, int minNei, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled){
   // create passthrough filter instance
  pcl::RadiusOutlierRemoval<pcl::PointXYZ> r_rem;
@@ -82,11 +85,14 @@ void statOutlier (int mK, double stdDev, pcl::PointCloud<pcl::PointNormal>::Ptr 
 }
 
 //void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
-void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh){	
+void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh){
 		pcl::Poisson<pcl::PointNormal> poisson;
 		poisson.setDepth(depth);
 		poisson.setInputCloud(preMesh);
-		poisson.reconstruct(*mesh);
+		poisson.reconstruct(*updateMesh);
+		boost::mutex::scoped_lock updateLock(updateModelMutex);
+		*mesh = *updateMesh;
+		update = true;
 		}
 
 void send_(tcp::socket & socket, const string& message){
@@ -145,6 +151,9 @@ main (int argc, char** argv)
 	pcl::PolygonMesh::Ptr mesh;
 	mesh = boost::make_shared<pcl::PolygonMesh>();
 
+	pcl::PolygonMesh::Ptr updateMesh;
+	mesh = boost::make_shared<pcl::PolygonMesh>();
+
 
 // Create new io service
 	boost::asio::io_service io_service;
@@ -182,7 +191,7 @@ main (int argc, char** argv)
 	int cloudSize_new = 0;
 	int track = 0;
 	int ptStart = 150;
-	int ftStart = 10000;
+	int ftStart = 1000;
 
 	///////FILTER///////
 	int minNei = 40;	// 10 old
@@ -192,7 +201,7 @@ main (int argc, char** argv)
 	double rad = 0.05;
 
 	///////Normal Estimation///////
-	double neRad = 0.03; // 0.05
+	double neRad = 0.05; // 0.05
 
 	///////STATISTICAL OUTLIER REMOVAL//////
 	int mK = 50; //Set the number of nearest neighbors to use for mean distance estimation.
@@ -281,7 +290,6 @@ main (int argc, char** argv)
 	  		cout <<"Error Reading Number of Points: " << err1.message() << endl;
 	  		cout <<"Saving Mesh + Point Cloud And Exiting... " << endl;
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
-	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
 	  		return 0;
 		}
@@ -300,7 +308,6 @@ main (int argc, char** argv)
 	  		cout <<"Error Reading New Points: " << err1.message() << endl;
 	  		cout <<"Saving Mesh + Point Cloud And Exiting... " << endl;
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
-	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
   		return 0;
 		}
@@ -420,7 +427,8 @@ main (int argc, char** argv)
 				start_time = pcl::getTime();
 				/// CLEAR POINT CLOUDS /////
 			//	meshReconstruct(depth, cloud_point_normals, mesh);
-				meshReconstruct(depth, preMesh, mesh);
+				boost::thread meshThread(meshReconstruct, depth, preMesh, mesh, updateMesh);
+			//	meshReconstruct(depth, preMesh, mesh, updateMesh);
 				end_time = pcl::getTime ();
 				elapsed_Mesh = end_time - start_time;
 			}
@@ -431,11 +439,9 @@ main (int argc, char** argv)
     	viewer->removeAllPointClouds();
     	if (cloud->points.size() > ptStart )
 		{ 
-//			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
-			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
+			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
     		viewer->addPolygonMesh(*mesh,"Poisson");
-//    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output");
-    		viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output");
+    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output");
   		}
   		else 
   		{	
@@ -469,7 +475,6 @@ main (int argc, char** argv)
 
 	}
     pcl::io::savePCDFile ("Points.pcd", *cloud);
-    pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
     pcl::io::saveVTKFile ("mesh.vtk", *mesh);
     return (0);
 }
