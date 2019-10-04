@@ -48,10 +48,10 @@ RM = /usr/local/Cellar/cmake/3.15.3/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/Viv/fyp/server/serThread
+CMAKE_SOURCE_DIR = /Users/Viv/fyp/Server/pois_test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/Viv/fyp/server/serThread/build
+CMAKE_BINARY_DIR = /Users/Viv/fyp/Server/pois_test/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Viv/fyp/server/serThread/build/CMakeFiles /Users/Viv/fyp/server/serThread/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Viv/fyp/Server/pois_test/build/CMakeFiles /Users/Viv/fyp/Server/pois_test/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Viv/fyp/server/serThread/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/Viv/fyp/Server/pois_test/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ServerThread
+# Target rules for targets named pois
 
 # Build rule for target.
-ServerThread: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ServerThread
-.PHONY : ServerThread
+pois: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pois
+.PHONY : pois
 
 # fast build rule for target.
-ServerThread/fast:
-	$(MAKE) -f CMakeFiles/ServerThread.dir/build.make CMakeFiles/ServerThread.dir/build
-.PHONY : ServerThread/fast
+pois/fast:
+	$(MAKE) -f CMakeFiles/pois.dir/build.make CMakeFiles/pois.dir/build
+.PHONY : pois/fast
 
-serThread.o: serThread.cpp.o
+pois.o: pois.cpp.o
 
-.PHONY : serThread.o
+.PHONY : pois.o
 
 # target to build an object file
-serThread.cpp.o:
-	$(MAKE) -f CMakeFiles/ServerThread.dir/build.make CMakeFiles/ServerThread.dir/serThread.cpp.o
-.PHONY : serThread.cpp.o
+pois.cpp.o:
+	$(MAKE) -f CMakeFiles/pois.dir/build.make CMakeFiles/pois.dir/pois.cpp.o
+.PHONY : pois.cpp.o
 
-serThread.i: serThread.cpp.i
+pois.i: pois.cpp.i
 
-.PHONY : serThread.i
+.PHONY : pois.i
 
 # target to preprocess a source file
-serThread.cpp.i:
-	$(MAKE) -f CMakeFiles/ServerThread.dir/build.make CMakeFiles/ServerThread.dir/serThread.cpp.i
-.PHONY : serThread.cpp.i
+pois.cpp.i:
+	$(MAKE) -f CMakeFiles/pois.dir/build.make CMakeFiles/pois.dir/pois.cpp.i
+.PHONY : pois.cpp.i
 
-serThread.s: serThread.cpp.s
+pois.s: pois.cpp.s
 
-.PHONY : serThread.s
+.PHONY : pois.s
 
 # target to generate assembly for a file
-serThread.cpp.s:
-	$(MAKE) -f CMakeFiles/ServerThread.dir/build.make CMakeFiles/ServerThread.dir/serThread.cpp.s
-.PHONY : serThread.cpp.s
+pois.cpp.s:
+	$(MAKE) -f CMakeFiles/pois.dir/build.make CMakeFiles/pois.dir/pois.cpp.s
+.PHONY : pois.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... ServerThread"
-	@echo "... serThread.o"
-	@echo "... serThread.i"
-	@echo "... serThread.s"
+	@echo "... pois"
+	@echo "... pois.o"
+	@echo "... pois.i"
+	@echo "... pois.s"
 .PHONY : help
 
 

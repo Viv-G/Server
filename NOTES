@@ -2,6 +2,18 @@ NOTES:
 
 View both point clouds - pcl_viewer -multiview 1 pointsFilt.pcd points.pcd -normals 1/10
 
+(POIS) - View 4 point clouds - pcl_viewer -multiview 1 points.pcd Filtered.pcd.pcd smoothedcloud.pcd poisson.vtk -normals 1/10
+
+THREADING 
+	-ONLY START NEW THREAD IF PREVIOUS MESH IS COMPLETE? SKIP IF NOT?
+	-START THREAD UNDER DIFFERENT NAME IF THREAD ISNT COMPLETE??
+
+MLS
+	- LINEAR, INSTEAD OF 2ND ORDER
+
+
+
+
 v1 - 
 mK = 15
 stdDev = 1
@@ -26,3 +38,11 @@ stdDev = 1
 normals still 0.03
 
 Removed: 
+
+V4
+NO FILTERING
+0.4 CONF
+
+
+
+Sweetspot around 0.6 confidence

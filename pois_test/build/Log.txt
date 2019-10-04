@@ -1,0 +1,17 @@
+Settings: 
+
+Downsampled: YES - Radius Outlier Removal
+Radius: 0.1
+Min Nearest Neighbors: 100
+Normal Estimation: Threaded Normal
+Normal Estimation Search Radius: 0.05
+MLS Search Radius: 0.05
+UPSCALE: Local Plane Search Radius: 0.1
+UPSCALE: Local Plane Step Size: 0.05
+Poisson Depth: 9
+TIMING: 
+	Crop Points (PassThrough)... 3.09944e-05
+	Downsample (Radius Outlier Removal)... 0.0298476
+	MLS Smoothing and Upscale (MLS Smooth + Upscale)... 0.0200083
+	Normal Estimation... 0.487821
+	Poission Meshing... 4.33371

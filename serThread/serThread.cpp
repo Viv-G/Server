@@ -54,6 +54,7 @@ void MLS(double rad, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled, pcl:
 	pcl::MovingLeastSquares<pcl::PointXYZ, pcl::PointXYZ> mls;
 	mls.setInputCloud (cloud_downsampled);
 	mls.setSearchRadius(rad);
+	 mls.setPolynomialOrder(1);
 	mls.process(*mls_points);
 }
 
@@ -99,6 +100,12 @@ void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, 
 		double meshTime = end_time - start_time;
 		cout << "MESH-\tMesh Time: " << meshTime << endl;
 		cout << "MESH-\tPointCloud Size: " << preMesh->points.size() << endl;
+		ofstream Logfile;
+		Logfile.open("Log.txt", ios::out | ios::app );
+		Logfile << "\n\t/////////MESHING/////////" << endl;
+		Logfile << "\tMESH-\tMesh Time: " << meshTime << endl;
+		Logfile << "\tMESH-\tPointCloud Size: " << preMesh->points.size() << endl;
+		Logfile.close();
 		}
 
 void send_(tcp::socket & socket, const string& message){
@@ -144,58 +151,14 @@ main (int argc, char** argv)
 	pcl::PolygonMesh::Ptr mesh (new pcl::PolygonMesh());
 	pcl::PolygonMesh::Ptr updateMesh (new pcl::PolygonMesh());
 
-	double meshTime = 0;
-
 	boost::thread meshThread;
 
+	// Declare Tracking Variables
+	///////TIMING VARIABLES////////
 
-	/*pcl::PointCloud<pcl::PointXYZ>::Ptr cloud;
-	cloud = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudTemp;
-	cloudTemp = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
-
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled;
-	cloud_downsampled = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
-
-	pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points;
-	mls_points = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
-
-	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals;
-	cloud_normals = boost::make_shared<pcl::PointCloud<pcl::Normal>>();
-
-	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals;
-	cloud_point_normals = boost::make_shared<pcl::PointCloud<pcl::PointNormal>>();
-
-	pcl::PointCloud<pcl::PointNormal>::Ptr preMesh;
-	preMesh = boost::make_shared<pcl::PointCloud<pcl::PointNormal>>();
-
-	pcl::PolygonMesh::Ptr mesh;
-	mesh = boost::make_shared<pcl::PolygonMesh>();
-
-	pcl::PolygonMesh::Ptr updateMesh;
-	updateMesh = boost::make_shared<pcl::PolygonMesh>(); */
-
-
-// Create new io service
-	boost::asio::io_service io_service;
-// Listen for new connection
-	tcp::endpoint endpoint (tcp::v4 (), static_cast<unsigned short> (port));
-	tcp::acceptor acceptor (io_service, endpoint);
-// Create Socket
-	tcp::socket socket (io_service);
-// Wait for Connection and Announce
-	std::cout << "Listening on port " << port << "..." << std::endl;
-	acceptor.accept (socket);
-	std::cout << "Client connected." << std::endl;
-
-// Declare Tracking Variables
-	///////TIMING VARIABLES////////      
-	double start_time_master = pcl::getTime ();
 	double readNumTrack;
 	double readPointTrack;
-	double start_time_Read = pcl::getTime();
+
 	double start_time, end_time = 0;
 	double new_time_Read;
 	double elapsed_time;
@@ -215,6 +178,9 @@ main (int argc, char** argv)
 	int track = 0;
 	int ptStart = 150;
 	int ftStart = 10000;
+	double totalTime = 0;
+	double end_time_total = 0;
+
 
 	///////FILTER///////
 	int minNei = 40;	// 10 old
@@ -227,11 +193,39 @@ main (int argc, char** argv)
 	double neRad = 0.05; // 0.05
 
 	///////STATISTICAL OUTLIER REMOVAL//////
-	int mK = 75; //Set the number of nearest neighbors to use for mean distance estimation.
+	int mK = 100; //Set the number of nearest neighbors to use for mean distance estimation.
 	double stdDev = 1.0; //Set the standard deviation multiplier for the distance threshold calculation.
 
 	///////MESHING////////////
 	int depth = 6;
+
+	ofstream Logfile;
+	Logfile.open("Log.txt", ios::out | ios::trunc);
+	Logfile << "/////////RADIUS OUTLIER REMOVAL/////////" << endl;
+	Logfile << "\tRadius: " << radDown << endl;
+  	Logfile << "\tMin Nearest Neighbors: " << minNei << endl;
+ 	Logfile << "\n/////////STATISTICAL OUTLIER REMOVAL/////////" << endl;
+	Logfile << "\tStandard Deviation Multiplier: " << radDown << endl;
+  	Logfile << "\tNearest Neighbors: " << mK << endl; 	
+  	Logfile << "\n/////////SMOOTHING & NORMAL ESTIMATION/////////" << endl;
+  	Logfile << "\tMLS Search Radius: " << rad << endl;
+  	Logfile << "\tNormal Estimation Search Radius: " << neRad << endl;
+  	Logfile << "\n/////////POISSON MESHING/////////" << endl;
+    Logfile << "\tPoisson Depth: " << depth << endl;
+    Logfile << "\n\n/////////START RUN/////////" << endl;
+    Logfile.close();
+
+// Create new io service
+	boost::asio::io_service io_service;
+// Listen for new connection
+	tcp::endpoint endpoint (tcp::v4 (), static_cast<unsigned short> (port));
+	tcp::acceptor acceptor (io_service, endpoint);
+// Create Socket
+	tcp::socket socket (io_service);
+// Wait for Connection and Announce
+	std::cout << "Listening on port " << port << "..." << std::endl;
+	acceptor.accept (socket);
+	std::cout << "Client connected." << std::endl;
 
 	// Initial cloudTemp setup
 	cloudTemp->height = 1;
@@ -297,7 +291,9 @@ main (int argc, char** argv)
 //  viewer->setCameraClipDistances(0.00522511, 50);
   	viewer->initCameraParameters ();
   	viewer->spinOnce(1);
-
+  	double start_time_total = pcl::getTime ();
+	double start_time_master = pcl::getTime ();
+	double start_time_Read = pcl::getTime();
 
 	// ENTER MAIN LOOP
     while (!viewer->wasStopped ())
@@ -315,6 +311,16 @@ main (int argc, char** argv)
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
 	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+
+	  		end_time_total = pcl::getTime();
+    		totalTime = end_time_total - start_time_total;
+
+	  		Logfile.open("Log.txt", ios::out | ios::app);
+		    Logfile << "/////////TOTALS (END OF RUN)/////////" << endl;
+			Logfile << "\tTotal Run Time: " << totalTime << endl;
+		  	Logfile << "\tTotal Frames Recieved: " << track << endl;
+		  	Logfile << "\tCloud Size: " << cloudSize_new << endl;
+		  	Logfile.close();
 	  		if(meshThread.joinable())
 			{
 				meshThread.join();
@@ -338,6 +344,15 @@ main (int argc, char** argv)
 	  		pcl::io::savePCDFile ("Points.pcd", *cloud);
 	  		pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
 	  		pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+	  		end_time_total = pcl::getTime();
+    		totalTime = end_time_total - start_time_total;
+
+	  		Logfile.open("Log.txt", ios::out | ios::app );
+		    Logfile << "/////////TOTALS (END OF RUN)/////////" << endl;
+			Logfile << "\tTotal Run Time: " << totalTime << endl;
+		  	Logfile << "\tTotal Frames Recieved: " << track << endl;
+		  	Logfile << "\tCloud Size: " << cloudSize_new << endl;
+		  	Logfile.close();
 
 	  		if(meshThread.joinable())
 			{
@@ -446,6 +461,7 @@ main (int argc, char** argv)
 	 		cloud_point_normals->width = cloud_point_normals->height = 0;
 	 		cloud_point_normals->clear();
 			estNormals(neRad, mls_points, cloud_normals);
+//			pcl::concatenateFields(*mls_points,*cloud_normals, *cloud_point_normals);
 			pcl::concatenateFields(*mls_points,*cloud_normals, *cloud_point_normals);
 			end_time = pcl::getTime ();
 			elapsed_Normal = end_time - start_time;
@@ -529,8 +545,17 @@ main (int argc, char** argv)
           	cout << "\tRead Num Points Average Time: " << readNumAv << endl;
           	cout << "\tRead Points In Average Time: " << readPointAv << endl;
           	cout << "\tHandle PointCloud Average Time: " << handleAv << endl;
-          	cout << "\tMesh Average Time: " << handleAv << endl;
+//          	cout << "\tMesh Average Time: " << handleAv << endl;
 
+          	Logfile.open("Log.txt", ios::out | ios::app);
+          	Logfile << "\n\tFrame Number: " << track << endl;
+          	Logfile << "\tCloud Size: " << cloudSize_new << endl;
+          	Logfile << "\tRead Num Points Average Time: " << readNumAv << endl;
+          	Logfile << "\tRead Points In Average Time: " << readPointAv << endl;
+          	Logfile << "\tHandle PointCloud Average Time: " << handleAv << endl;
+
+//          	Logfile << "\tMesh Average Time: " << handleAv << endl;
+          	Logfile.close();
           	double frames_per_second = counter / elapsed_time;
           	start_time_master = new_time;
           	counter = 0;
@@ -541,7 +566,17 @@ main (int argc, char** argv)
     //    meshThread.join();
 	}
     pcl::io::savePCDFile ("Points.pcd", *cloud);
+    pcl::io::savePCDFile ("PointsFilt.pcd", *preMesh);
     pcl::io::saveVTKFile ("mesh.vtk", *mesh);
+    end_time_total = pcl::getTime();
+    totalTime = end_time_total - start_time_total;
+    //WRITE TO FILE
+    Logfile.open("Log.txt", ios::out | ios::app );
+    Logfile << "/////////TOTALS (END OF RUN)/////////" << endl;
+	Logfile << "\tTotal Run Time: " << totalTime << endl;
+  	Logfile << "\tTotal Frames Recieved: " << track << endl;
+  	Logfile << "\tCloud Size: " << cloudSize_new << endl;
+  	Logfile.close();
 
 	if(meshThread.joinable())
 		{
