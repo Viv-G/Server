@@ -1,6 +1,6 @@
 NOTES:
 
-View both point clouds - pcl_viewer -multiview 1 pointsFilt.pcd points.pcd -normals 1/10
+View both point clouds - pcl_viewer -multiview 1 mesh.vtk pointsFilt.pcd points.pcd -normals 1/10
 
 (POIS) - View 4 point clouds - pcl_viewer -multiview 1 points.pcd Filtered.pcd.pcd smoothedcloud.pcd poisson.vtk -normals 1/10
 
