@@ -1,0 +1,36 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 15
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 7
+
+
+/////////START RUN/////////
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.848677
+	MESH-	PointCloud Size: 3207
+
+/////////TIMINGS/////////
+	Radius Outlier Removal: 0.00765705 Seconds
+	MLS: 0.0117581 Seconds
+	Normals: 0.0232449 Seconds
+	Statistical Outlier: 0.088532 Seconds
+
+
+/////////TOTALS (END OF RUN)/////////
+	Input Cloud Size: 3730
+	Final Cloud Size: 3207
+	Total Run Time: 1.30156
+	Removed Overall: 523
+	Removed in Statistical Outlier Removal: 203
+	Removed in Radius Outlier Removal: 315

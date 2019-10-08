@@ -43,15 +43,16 @@ void
 usage (char ** argv)
 {
   cout << "usage: " << argv[0] << " <options>\n"
-       << "where options are:\n"
-       << "  -port p :: set the server port (default: 11111)\n"
-       << "-ft ftStart :: Set the number of points to start filtering at\n"
-	<< "-rD radDown :: Set the radius for Radius Outlier Removal (Default 0.05)\n"
-<< "-mNei minNei :: Set the minimum neighbours for Radius Outlier Removal (Default 40) \n"
-<<"-rad rad :: Set the search radius for MLS Smoothing (Default 0.04)\n"
-<<"-nr, neRad :: Set the search radius for Normal Estimation (Default 0.04)\n"
-<<"-std, stdDev :: Set the standard deviation multiplier for the statistical outlier removal\n"
-<<"-mK, mK :: Set the number of nearest neighbours for statistical outlier removal\n" << endl;
+    	<< "where options are:\n"
+    	<< "  -port p :: \tset the server port (default: 11111)\n"
+    	<< " -ft ftStart :: \tSet the number of points to start filtering at\n"
+		<< " -rD radDown :: \tSet the radius for Radius Outlier Removal (Default 0.05)\n"
+		<< " -mNei minNei :: \tSet the minimum neighbours for Radius Outlier Removal (Default 40) \n"
+		<<" -rad rad :: \tSet the search radius for MLS Smoothing (Default 0.04)\n"
+		<<" -nr, neRad :: \tSet the search radius for Normal Estimation (Default 0.04)\n"
+		<<" -std, stdDev :: \tSet the standard deviation multiplier for the statistical outlier removal\n"
+		<<" -mK, mK :: \tSet the number of nearest neighbours for statistical outlier removal\n" 
+		<<" -d, depth :: \tSet the depth for poisson meshing\n"<< endl;
 }
 
 void FilterPoints(double radDown, int minNei, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled){
@@ -70,7 +71,7 @@ void MLS(double rad, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled, pcl:
 	pcl::MovingLeastSquares<pcl::PointXYZ, pcl::PointXYZ> mls;
 	mls.setInputCloud (cloud_downsampled);
 	mls.setSearchRadius(rad);
-	 mls.setPolynomialOrder(1);
+	mls.setPolynomialOrder(0);
 	mls.process(*mls_points);
 }
 
@@ -114,8 +115,8 @@ void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, 
 		update = true;
 		double end_time = pcl::getTime ();
 		double meshTime = end_time - start_time;
-		cout << "MESH-\tMesh Time: " << meshTime << endl;
-		cout << "MESH-\tPointCloud Size: " << preMesh->points.size() << endl;
+//		cout << "MESH-\tMesh Time: " << meshTime << endl;
+//		cout << "MESH-\tPointCloud Size: " << preMesh->points.size() << endl;
 		ofstream Logfile;
 		Logfile.open(LogName, ios::out | ios::app );
 		Logfile << "\n/////////MESHING/////////" << endl;
@@ -138,6 +139,7 @@ main (int argc, char** argv)
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ> ());
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudTemp (new pcl::PointCloud<pcl::PointXYZ> ());
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled (new pcl::PointCloud<pcl::PointXYZ> ());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled2 (new pcl::PointCloud<pcl::PointXYZ> ());
 	pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points (new pcl::PointCloud<pcl::PointXYZ> ());
 	pcl::PointCloud<pcl::Normal>::Ptr cloud_normals (new pcl::PointCloud<pcl::Normal> ());
 	pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals (new pcl::PointCloud<pcl::PointNormal> ());
@@ -173,16 +175,20 @@ main (int argc, char** argv)
 	int cloudSize_new = 0;
 	int track = 0;
 	int ptStart = 150;
-	int ftStart = 10000;
+	int ftStart = 250;
 	double totalTime = 0;
 	double end_time_total = 0;
 
-		pcl::console::parse_argument (argc, argv, "-ft", ftStart);
+	pcl::console::parse_argument (argc, argv, "-ft", ftStart);
 
 
 	double start_time_total = pcl::getTime ();
 	double start_time_master = pcl::getTime ();
 	double start_time_Read = pcl::getTime();
+
+	//////CRUDE FILTER///////
+	double mU = 1.1;
+	pcl::console::parse_argument (argc, argv, "-mU", mU);
 
 
 	///////FILTER///////
@@ -224,6 +230,7 @@ main (int argc, char** argv)
   	std::string LogName = folName+"//Log_"+timeString+".txt";
   	std::string pointString = folName + "//PointsFilt.pcd";
   	std::string meshString = folName + "//mesh.vtk";
+  	std::string meshString2 = folName + "//model.stl";
   	std::string ptString = folName + "//points.pcd";
 
 
@@ -264,28 +271,47 @@ main (int argc, char** argv)
     Eigen::Vector4f cR;
 	compute3DCentroid(*cloud, cR);
 
-	//std::vector<double> dis;
-	
-	/* double avgProg = 0;
-	for (size_t i = 0; i < cloudSize_old; ++i){
-		avgProg += sqrt((cloud->points[i].x -cr[0])+(cloud->points[i].y -cr[1])+(cloud->points[i].z -cr[2]));
-	//	avgProg += dis[i];
-	}
-		double avgDistance = avgProg / i;
+	cout << "Centroid = " << cR[0] << " , "<< cR[1] << " , " << cR[2] << endl;
 
-	double dis = 0;
+	std::vector<float> dis;
+	float disTemp = 0;
+	float avgProg = 0;
+	float disSqrt = 0;
+
+	for (size_t i = 0; i < cloudSize_old; ++i){
+		disTemp = abs((cloud->points[i].x -cR[0])+(cloud->points[i].y -cR[1])+(cloud->points[i].z -cR[2]));
+		disSqrt = sqrt(disTemp);
+		dis.push_back(disSqrt);
+		avgProg += disSqrt;
+	}
+
+	float avgDistance = avgProg / dis.size();
+	cout << avgDistance << endl;
+	for (size_t i = 0; i < cloudSize_old; ++i){
+		disTemp = abs((cloud->points[i].x -cR[0])+(cloud->points[i].y -cR[1])+(cloud->points[i].z -cR[2]));
+		disSqrt = sqrt(disTemp);
+
+		if (disSqrt < mU*avgDistance){
+			cloudTemp->points.push_back(cloud->points[i]);
+		}
+	}
+
+	cout << "Cloud Temp Size = " << cloudTemp->points.size() << endl;
+
+
+	/*double dis = 0;
 	for (size_t i = 0; i < cloudSize_old; ++i){
 		dis = sqrt((cloud->points[i].x -cr[0])+(cloud->points[i].y -cr[1])+(cloud->points[i].z -cr[2]));
 		*/
 
 
-	/*	///////////////DOWNSAMPLE//////////////
+/*			///////////////DOWNSAMPLE//////////////
 	 		start_time = pcl::getTime ();
  			/// CLEAR POINT CLOUDS /////
 			FilterPoints(radDown, minNei, cloud, cloud_downsampled);
  			end_time = pcl::getTime ();
  			elapsed_rad = end_time - start_time;	 		
-			/////////////////////////////////////// */
+			///////////////////////////////////////  */
 
 			//////////// REMOVE FINAL OUTLIERS ////////////
 			start_time = pcl::getTime();
@@ -293,12 +319,20 @@ main (int argc, char** argv)
 			end_time = pcl::getTime ();
 			double elapsed_Stat = end_time - start_time;
 
+			///////////////FILTER//////////////
+	 		start_time = pcl::getTime ();
+ 			/// CLEAR POINT CLOUDS /////
+			FilterPoints(radDown, minNei, cloud_downsampled, cloud_downsampled2);
+ 			end_time = pcl::getTime ();
+ 			elapsed_rad = end_time - start_time;	 		
+			/////////////////////////////////////// 
+
 
 			/////////////MLS SMOOTHING////////////
 	 		start_time = pcl::getTime();
 	 		//// CLEAR POINT CLOUDS /////
 		 	
-		 	MLS(rad, cloud_downsampled, mls_points);
+		 	MLS(rad, cloud_downsampled2, mls_points);
 		 	
 		
 		  	end_time = pcl::getTime ();
@@ -345,23 +379,27 @@ main (int argc, char** argv)
 	int m(0);
 	int pN(0);
 	int p(0);
+	int pT(0);
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 	viewer = boost::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer");
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
 //	viewer->setCameraPosition(0.156407, 0.590266, -1.05477, cR[0], cR[1], cR[2], 0,1,0);
-	viewer->createViewPort (0.0, 0.0, 0.33, 1.0, m);
-	viewer->createViewPort (0.34, 0.0, 0.66, 1.0, pN);
-	viewer->createViewPort (0.67, 0.0, 1.0, 1.0, p);
+	viewer->createViewPort (0.0, 0.0, 0.25, 1.0, m);
+	viewer->createViewPort (0.26, 0.0, 0.5, 1.0, pN);
+	viewer->createViewPort (0.51, 0.0, 0.75, 1.0, pT);
+	viewer->createViewPort (0.76, 0.0, 1.0, 1.0, p);
 	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0);
 //	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0,pN);
 //	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0,pN);
 	viewer->addPolygonMesh(*mesh,"Poisson",m);
 	viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output",pN);
-//	viewer->addPointCloudNormals<pcl::PointNormal, pcl::Normal> (preMesh, normals, 10, 0.05, "normals");
 	viewer->addPointCloud<pcl::PointXYZ> (cloud, "pts",p);
+	viewer->addPointCloud<pcl::PointXYZ> (cloud_downsampled, "ptsTemp",pT);
+//	viewer->addPointCloudNormals<pcl::PointNormal, pcl::Normal> (preMesh, normals, 10, 0.05, "normals");
   	viewer->setBackgroundColor (0, 0, 0);
-  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"Output");
-  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"pts");
+  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"Output");
+  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"pts");
+  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"ptsTemp");
 //  viewer->setCameraFieldOfView(0.523599);
 //  viewer->setCameraClipDistances(0.00522511, 50);
 //  	viewer->setCameraPosition(0.156407, 0.590266, -1.05477, cR[0], cR[1], cR[2], 0,1,0);
@@ -378,6 +416,9 @@ main (int argc, char** argv)
           	Logfile << "\tNormals: " << elapsed_Normal << " Seconds" << endl;
           	Logfile << "\tStatistical Outlier: " << elapsed_Stat << " Seconds" << endl;
           	int remPts = cloudSize_old - cloudSize_new;
+          	int remPtsStat = cloudSize_old - cloud_downsampled->points.size();
+          	int remPtsRad = cloud_downsampled->points.size() - cloud_downsampled2->points.size();
+
 
 //          	Logfile << "\tMesh Average Time: " << handleAv << endl;
           	Logfile.close();
@@ -389,13 +430,17 @@ main (int argc, char** argv)
     pcl::io::savePCDFile (pointString, *preMesh);
     pcl::io::savePCDFile (ptString, *cloud);
     pcl::io::saveVTKFile (meshString, *mesh);
+    pcl::io::savePolygonFileSTL(meshString2, *mesh, true);
     //WRITE TO FILE
     Logfile.open(LogName, ios::out | ios::app );
     Logfile << "\n\n/////////TOTALS (END OF RUN)/////////" << endl;
-    Logfile << "\t Input Cloud Size: " << cloudSize_old << endl;
+    Logfile << "\tInput Cloud Size: " << cloudSize_old << endl;
     Logfile << "\tFinal Cloud Size: " << cloudSize_new << endl;
 	Logfile << "\tTotal Run Time: " << elapsed_time << endl;
-	Logfile << "\tRemoved: " << remPts << endl;
+	Logfile << "\tRemoved Overall: " << remPts << endl;
+	Logfile << "\tRemoved in Statistical Outlier Removal: " << remPtsStat << endl;
+	Logfile << "\tRemoved in Radius Outlier Removal: " << remPtsRad << endl;
+
   	Logfile.close();
 
     return (0);

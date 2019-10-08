@@ -1,0 +1,1623 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 15
+	Cloud Size: 10
+	Read Num Points Average Time: 0.0391553
+	Read Points In Average Time: 0.0192978
+	Handle PointCloud Average Time: 3.01679e-05
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.355893
+	MESH-	PointCloud Size: 133
+
+	Frame Number: 24
+	Cloud Size: 178
+	Read Num Points Average Time: 0.0544639
+	Read Points In Average Time: 0.0153716
+	Handle PointCloud Average Time: 6.07471e-05
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.364683
+	MESH-	PointCloud Size: 136
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.38513
+	MESH-	PointCloud Size: 136
+
+	Frame Number: 36
+	Cloud Size: 181
+	Read Num Points Average Time: 0.0537192
+	Read Points In Average Time: 0.0118313
+	Handle PointCloud Average Time: 0.000170562
+
+	Frame Number: 48
+	Cloud Size: 181
+	Read Num Points Average Time: 0.0564707
+	Read Points In Average Time: 0.0125913
+	Handle PointCloud Average Time: 0.00022685
+
+	Frame Number: 58
+	Cloud Size: 181
+	Read Num Points Average Time: 0.0608038
+	Read Points In Average Time: 0.0124765
+	Handle PointCloud Average Time: 0.000267473
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.371735
+	MESH-	PointCloud Size: 145
+
+	Frame Number: 69
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0616588
+	Read Points In Average Time: 0.0133543
+	Handle PointCloud Average Time: 0.000282281
+
+	Frame Number: 79
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0657216
+	Read Points In Average Time: 0.0123998
+	Handle PointCloud Average Time: 0.000310596
+
+	Frame Number: 89
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0690058
+	Read Points In Average Time: 0.0117433
+	Handle PointCloud Average Time: 0.000333526
+
+	Frame Number: 98
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0714324
+	Read Points In Average Time: 0.0114924
+	Handle PointCloud Average Time: 0.000344984
+
+	Frame Number: 101
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0761357
+	Read Points In Average Time: 0.0151762
+	Handle PointCloud Average Time: 0.000349585
+
+	Frame Number: 118
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0659103
+	Read Points In Average Time: 0.0180268
+	Handle PointCloud Average Time: 0.000362738
+
+	Frame Number: 128
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0720316
+	Read Points In Average Time: 0.0171745
+	Handle PointCloud Average Time: 0.000361513
+
+	Frame Number: 137
+	Cloud Size: 189
+	Read Num Points Average Time: 0.0703765
+	Read Points In Average Time: 0.0205696
+	Handle PointCloud Average Time: 0.000361838
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.356509
+	MESH-	PointCloud Size: 173
+
+	Frame Number: 142
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0678991
+	Read Points In Average Time: 0.033231
+	Handle PointCloud Average Time: 0.00037066
+
+	Frame Number: 161
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0598885
+	Read Points In Average Time: 0.0326814
+	Handle PointCloud Average Time: 0.000442591
+
+	Frame Number: 178
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0541707
+	Read Points In Average Time: 0.0355103
+	Handle PointCloud Average Time: 0.000496087
+
+	Frame Number: 198
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0494999
+	Read Points In Average Time: 0.0354652
+	Handle PointCloud Average Time: 0.000541529
+
+	Frame Number: 213
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0471254
+	Read Points In Average Time: 0.0354866
+	Handle PointCloud Average Time: 0.000545975
+
+	Frame Number: 222
+	Cloud Size: 418
+	Read Num Points Average Time: 0.049071
+	Read Points In Average Time: 0.0343363
+	Handle PointCloud Average Time: 0.000553329
+
+	Frame Number: 233
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0507301
+	Read Points In Average Time: 0.0330206
+	Handle PointCloud Average Time: 0.000553967
+
+	Frame Number: 244
+	Cloud Size: 418
+	Read Num Points Average Time: 0.0512571
+	Read Points In Average Time: 0.0326725
+	Handle PointCloud Average Time: 0.000552138
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.37514
+	MESH-	PointCloud Size: 348
+
+	Frame Number: 254
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0524046
+	Read Points In Average Time: 0.0316264
+	Handle PointCloud Average Time: 0.000571838
+
+	Frame Number: 265
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0537498
+	Read Points In Average Time: 0.0305102
+	Handle PointCloud Average Time: 0.000603669
+
+	Frame Number: 275
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0546395
+	Read Points In Average Time: 0.0297511
+	Handle PointCloud Average Time: 0.000622854
+
+	Frame Number: 285
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0542478
+	Read Points In Average Time: 0.0307681
+	Handle PointCloud Average Time: 0.000647005
+
+	Frame Number: 297
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0542972
+	Read Points In Average Time: 0.0304101
+	Handle PointCloud Average Time: 0.000664452
+
+	Frame Number: 307
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0553731
+	Read Points In Average Time: 0.0341607
+	Handle PointCloud Average Time: 0.000679483
+
+	Frame Number: 325
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0523073
+	Read Points In Average Time: 0.0343518
+	Handle PointCloud Average Time: 0.000715584
+
+	Frame Number: 341
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0523984
+	Read Points In Average Time: 0.0332858
+	Handle PointCloud Average Time: 0.000734492
+
+	Frame Number: 351
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0521106
+	Read Points In Average Time: 0.036535
+	Handle PointCloud Average Time: 0.000748
+
+	Frame Number: 374
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0499594
+	Read Points In Average Time: 0.0349789
+	Handle PointCloud Average Time: 0.000778054
+
+	Frame Number: 386
+	Cloud Size: 592
+	Read Num Points Average Time: 0.0495844
+	Read Points In Average Time: 0.0349438
+	Handle PointCloud Average Time: 0.000784949
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.397683
+	MESH-	PointCloud Size: 595
+
+	Frame Number: 396
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0502117
+	Read Points In Average Time: 0.0344795
+	Handle PointCloud Average Time: 0.000808775
+
+	Frame Number: 407
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0505188
+	Read Points In Average Time: 0.034238
+	Handle PointCloud Average Time: 0.00083206
+
+	Frame Number: 415
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0518942
+	Read Points In Average Time: 0.0345009
+	Handle PointCloud Average Time: 0.000845004
+
+	Frame Number: 432
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0516119
+	Read Points In Average Time: 0.0333066
+	Handle PointCloud Average Time: 0.000877677
+
+	Frame Number: 442
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0519525
+	Read Points In Average Time: 0.0346227
+	Handle PointCloud Average Time: 0.000883352
+
+	Frame Number: 459
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0514207
+	Read Points In Average Time: 0.0335789
+	Handle PointCloud Average Time: 0.000910075
+
+	Frame Number: 467
+	Cloud Size: 830
+	Read Num Points Average Time: 0.0513921
+	Read Points In Average Time: 0.0358819
+	Handle PointCloud Average Time: 0.000920057
+
+	Frame Number: 489
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0497992
+	Read Points In Average Time: 0.034593
+	Handle PointCloud Average Time: 0.0009528
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.417149
+	MESH-	PointCloud Size: 796
+
+	Frame Number: 500
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0503869
+	Read Points In Average Time: 0.0340159
+	Handle PointCloud Average Time: 0.000985079
+
+	Frame Number: 509
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.050672
+	Read Points In Average Time: 0.0340589
+	Handle PointCloud Average Time: 0.00100357
+
+	Frame Number: 519
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0506373
+	Read Points In Average Time: 0.034162
+	Handle PointCloud Average Time: 0.00101703
+
+	Frame Number: 526
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0504527
+	Read Points In Average Time: 0.0349691
+	Handle PointCloud Average Time: 0.00103934
+
+	Frame Number: 538
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0494674
+	Read Points In Average Time: 0.0356357
+	Handle PointCloud Average Time: 0.00107065
+
+	Frame Number: 546
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.049966
+	Read Points In Average Time: 0.0355974
+	Handle PointCloud Average Time: 0.00109839
+
+	Frame Number: 554
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0506705
+	Read Points In Average Time: 0.0353368
+	Handle PointCloud Average Time: 0.00112047
+
+	Frame Number: 564
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.051024
+	Read Points In Average Time: 0.0350745
+	Handle PointCloud Average Time: 0.00112106
+
+	Frame Number: 575
+	Cloud Size: 1042
+	Read Num Points Average Time: 0.0515061
+	Read Points In Average Time: 0.0345606
+	Handle PointCloud Average Time: 0.00111939
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.435197
+	MESH-	PointCloud Size: 908
+
+	Frame Number: 584
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0519332
+	Read Points In Average Time: 0.0343528
+	Handle PointCloud Average Time: 0.00113167
+
+	Frame Number: 595
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0519618
+	Read Points In Average Time: 0.0343838
+	Handle PointCloud Average Time: 0.00115359
+
+	Frame Number: 603
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0517448
+	Read Points In Average Time: 0.0349728
+	Handle PointCloud Average Time: 0.00116925
+
+	Frame Number: 616
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0507881
+	Read Points In Average Time: 0.0353578
+	Handle PointCloud Average Time: 0.00119025
+
+	Frame Number: 625
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0510783
+	Read Points In Average Time: 0.0356883
+	Handle PointCloud Average Time: 0.00120582
+
+	Frame Number: 640
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0501472
+	Read Points In Average Time: 0.0359389
+	Handle PointCloud Average Time: 0.00122368
+
+	Frame Number: 650
+	Cloud Size: 1139
+	Read Num Points Average Time: 0.0501943
+	Read Points In Average Time: 0.0359054
+	Handle PointCloud Average Time: 0.00123349
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.461703
+	MESH-	PointCloud Size: 1154
+
+	Frame Number: 658
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.050117
+	Read Points In Average Time: 0.0363396
+	Handle PointCloud Average Time: 0.00125332
+
+	Frame Number: 661
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0498896
+	Read Points In Average Time: 0.0394287
+	Handle PointCloud Average Time: 0.00126575
+
+	Frame Number: 691
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0481787
+	Read Points In Average Time: 0.0378433
+	Handle PointCloud Average Time: 0.00132157
+
+	Frame Number: 697
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0497642
+	Read Points In Average Time: 0.0413095
+	Handle PointCloud Average Time: 0.00133638
+
+	Frame Number: 734
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0472568
+	Read Points In Average Time: 0.0392732
+	Handle PointCloud Average Time: 0.00140489
+
+	Frame Number: 753
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0465211
+	Read Points In Average Time: 0.0387147
+	Handle PointCloud Average Time: 0.00142552
+
+	Frame Number: 761
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0467937
+	Read Points In Average Time: 0.0388437
+	Handle PointCloud Average Time: 0.00143693
+
+	Frame Number: 771
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0465105
+	Read Points In Average Time: 0.0394677
+	Handle PointCloud Average Time: 0.00144304
+
+	Frame Number: 786
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0458841
+	Read Points In Average Time: 0.0394687
+	Handle PointCloud Average Time: 0.00144756
+
+	Frame Number: 797
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0462529
+	Read Points In Average Time: 0.0390248
+	Handle PointCloud Average Time: 0.00145178
+
+	Frame Number: 807
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.0467593
+	Read Points In Average Time: 0.0386118
+	Handle PointCloud Average Time: 0.00146335
+
+	Frame Number: 817
+	Cloud Size: 1380
+	Read Num Points Average Time: 0.047307
+	Read Points In Average Time: 0.0382185
+	Handle PointCloud Average Time: 0.00147874
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.501895
+	MESH-	PointCloud Size: 1284
+
+	Frame Number: 826
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0480455
+	Read Points In Average Time: 0.0379407
+	Handle PointCloud Average Time: 0.00148579
+
+	Frame Number: 839
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0481931
+	Read Points In Average Time: 0.0374361
+	Handle PointCloud Average Time: 0.00149446
+
+	Frame Number: 849
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0482426
+	Read Points In Average Time: 0.0374253
+	Handle PointCloud Average Time: 0.00151676
+
+	Frame Number: 859
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0483003
+	Read Points In Average Time: 0.0373941
+	Handle PointCloud Average Time: 0.00153353
+
+	Frame Number: 867
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0487214
+	Read Points In Average Time: 0.0372916
+	Handle PointCloud Average Time: 0.00155658
+
+	Frame Number: 877
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.049072
+	Read Points In Average Time: 0.0370048
+	Handle PointCloud Average Time: 0.0015727
+
+	Frame Number: 887
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.049489
+	Read Points In Average Time: 0.0367185
+	Handle PointCloud Average Time: 0.00158728
+
+	Frame Number: 892
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0499898
+	Read Points In Average Time: 0.0368137
+	Handle PointCloud Average Time: 0.0015962
+
+	Frame Number: 903
+	Cloud Size: 1523
+	Read Num Points Average Time: 0.0494139
+	Read Points In Average Time: 0.0375424
+	Handle PointCloud Average Time: 0.00160558
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.503067
+	MESH-	PointCloud Size: 1487
+
+	Frame Number: 914
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0493965
+	Read Points In Average Time: 0.03737
+	Handle PointCloud Average Time: 0.00162695
+
+	Frame Number: 925
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0496768
+	Read Points In Average Time: 0.0370546
+	Handle PointCloud Average Time: 0.00164595
+
+	Frame Number: 932
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0504947
+	Read Points In Average Time: 0.0368494
+	Handle PointCloud Average Time: 0.00165477
+
+	Frame Number: 944
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0507376
+	Read Points In Average Time: 0.0364423
+	Handle PointCloud Average Time: 0.00168143
+
+	Frame Number: 954
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0509125
+	Read Points In Average Time: 0.0362822
+	Handle PointCloud Average Time: 0.00169037
+
+	Frame Number: 964
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0510785
+	Read Points In Average Time: 0.0361414
+	Handle PointCloud Average Time: 0.00170188
+
+	Frame Number: 971
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0516877
+	Read Points In Average Time: 0.0359472
+	Handle PointCloud Average Time: 0.00172432
+
+	Frame Number: 982
+	Cloud Size: 1760
+	Read Num Points Average Time: 0.0520073
+	Read Points In Average Time: 0.0356179
+	Handle PointCloud Average Time: 0.00173776
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.490499
+	MESH-	PointCloud Size: 1565
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.551013
+	MESH-	PointCloud Size: 1565
+
+	Frame Number: 990
+	Cloud Size: 1853
+	Read Num Points Average Time: 0.0518915
+	Read Points In Average Time: 0.0353379
+	Handle PointCloud Average Time: 0.00173084
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.494854
+	MESH-	PointCloud Size: 1564
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.494734
+	MESH-	PointCloud Size: 1566
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.509529
+	MESH-	PointCloud Size: 1569
+
+	Frame Number: 997
+	Cloud Size: 1858
+	Read Num Points Average Time: 0.0518191
+	Read Points In Average Time: 0.0350899
+	Handle PointCloud Average Time: 0.00172173
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.509052
+	MESH-	PointCloud Size: 1569
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.507064
+	MESH-	PointCloud Size: 1569
+
+	Frame Number: 1000
+	Cloud Size: 1860
+	Read Num Points Average Time: 0.0516637
+	Read Points In Average Time: 0.0349847
+	Handle PointCloud Average Time: 0.00171827
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.493367
+	MESH-	PointCloud Size: 1577
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.543717
+	MESH-	PointCloud Size: 1689
+
+	Frame Number: 1017
+	Cloud Size: 1972
+	Read Num Points Average Time: 0.0508006
+	Read Points In Average Time: 0.0344054
+	Handle PointCloud Average Time: 0.0017182
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.514021
+	MESH-	PointCloud Size: 1689
+
+	Frame Number: 1031
+	Cloud Size: 1972
+	Read Num Points Average Time: 0.050716
+	Read Points In Average Time: 0.0340771
+	Handle PointCloud Average Time: 0.0017539
+
+	Frame Number: 1038
+	Cloud Size: 1973
+	Read Num Points Average Time: 0.0511607
+	Read Points In Average Time: 0.034133
+	Handle PointCloud Average Time: 0.00177611
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.493036
+	MESH-	PointCloud Size: 1690
+
+	Frame Number: 1046
+	Cloud Size: 1973
+	Read Num Points Average Time: 0.0510533
+	Read Points In Average Time: 0.0344918
+	Handle PointCloud Average Time: 0.00179002
+
+	Frame Number: 1051
+	Cloud Size: 1973
+	Read Num Points Average Time: 0.0511887
+	Read Points In Average Time: 0.0351026
+	Handle PointCloud Average Time: 0.00180096
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.561958
+	MESH-	PointCloud Size: 1881
+
+	Frame Number: 1068
+	Cloud Size: 2178
+	Read Num Points Average Time: 0.0507835
+	Read Points In Average Time: 0.034821
+	Handle PointCloud Average Time: 0.00183712
+
+	Frame Number: 1077
+	Cloud Size: 2178
+	Read Num Points Average Time: 0.0510391
+	Read Points In Average Time: 0.0348068
+	Handle PointCloud Average Time: 0.00185939
+
+	Frame Number: 1081
+	Cloud Size: 2178
+	Read Num Points Average Time: 0.0509271
+	Read Points In Average Time: 0.0358029
+	Handle PointCloud Average Time: 0.00187054
+
+	Frame Number: 1095
+	Cloud Size: 2178
+	Read Num Points Average Time: 0.0503744
+	Read Points In Average Time: 0.0363444
+	Handle PointCloud Average Time: 0.00190007
+
+	Frame Number: 1097
+	Cloud Size: 2178
+	Read Num Points Average Time: 0.0502826
+	Read Points In Average Time: 0.0375041
+	Handle PointCloud Average Time: 0.00190624
+
+	Frame Number: 1116
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0495266
+	Read Points In Average Time: 0.0373653
+	Handle PointCloud Average Time: 0.00195411
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.554269
+	MESH-	PointCloud Size: 2114
+
+	Frame Number: 1123
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.049732
+	Read Points In Average Time: 0.0374423
+	Handle PointCloud Average Time: 0.00197225
+
+	Frame Number: 1131
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0495755
+	Read Points In Average Time: 0.0377835
+	Handle PointCloud Average Time: 0.00199418
+
+	Frame Number: 1141
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0498782
+	Read Points In Average Time: 0.0375447
+	Handle PointCloud Average Time: 0.00200886
+
+	Frame Number: 1152
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0501185
+	Read Points In Average Time: 0.0372276
+	Handle PointCloud Average Time: 0.00201856
+
+	Frame Number: 1160
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0504386
+	Read Points In Average Time: 0.0371151
+	Handle PointCloud Average Time: 0.00203308
+
+	Frame Number: 1167
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0509217
+	Read Points In Average Time: 0.0369403
+	Handle PointCloud Average Time: 0.00205013
+
+	Frame Number: 1176
+	Cloud Size: 2401
+	Read Num Points Average Time: 0.0511055
+	Read Points In Average Time: 0.0369107
+	Handle PointCloud Average Time: 0.00206534
+
+	Frame Number: 1178
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0513268
+	Read Points In Average Time: 0.0376881
+	Handle PointCloud Average Time: 0.00207019
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.636217
+	MESH-	PointCloud Size: 2282
+
+	Frame Number: 1201
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0507716
+	Read Points In Average Time: 0.0369949
+	Handle PointCloud Average Time: 0.00208891
+
+	Frame Number: 1210
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0510878
+	Read Points In Average Time: 0.036765
+	Handle PointCloud Average Time: 0.00210154
+
+	Frame Number: 1220
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.05131
+	Read Points In Average Time: 0.0366156
+	Handle PointCloud Average Time: 0.00211564
+
+	Frame Number: 1231
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0515348
+	Read Points In Average Time: 0.0363831
+	Handle PointCloud Average Time: 0.00212775
+
+	Frame Number: 1238
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0517377
+	Read Points In Average Time: 0.0365993
+	Handle PointCloud Average Time: 0.00213414
+
+	Frame Number: 1245
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.052653
+	Read Points In Average Time: 0.0364566
+	Handle PointCloud Average Time: 0.0021472
+
+	Frame Number: 1257
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0521889
+	Read Points In Average Time: 0.0369615
+	Handle PointCloud Average Time: 0.00218199
+
+	Frame Number: 1275
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0518519
+	Read Points In Average Time: 0.036618
+	Handle PointCloud Average Time: 0.00219945
+
+	Frame Number: 1280
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0520965
+	Read Points In Average Time: 0.037069
+	Handle PointCloud Average Time: 0.00220289
+
+	Frame Number: 1298
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0518029
+	Read Points In Average Time: 0.0366871
+	Handle PointCloud Average Time: 0.00222075
+
+	Frame Number: 1308
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0520636
+	Read Points In Average Time: 0.0364367
+	Handle PointCloud Average Time: 0.0022133
+
+	Frame Number: 1316
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0522318
+	Read Points In Average Time: 0.0364346
+	Handle PointCloud Average Time: 0.00220521
+
+	Frame Number: 1325
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.052478
+	Read Points In Average Time: 0.0363592
+	Handle PointCloud Average Time: 0.0022153
+
+	Frame Number: 1328
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0527004
+	Read Points In Average Time: 0.0367912
+	Handle PointCloud Average Time: 0.00222735
+
+	Frame Number: 1338
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0529125
+	Read Points In Average Time: 0.0365952
+	Handle PointCloud Average Time: 0.00225549
+
+	Frame Number: 1347
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0531901
+	Read Points In Average Time: 0.0364001
+	Handle PointCloud Average Time: 0.00226901
+
+	Frame Number: 1356
+	Cloud Size: 2610
+	Read Num Points Average Time: 0.0534673
+	Read Points In Average Time: 0.0361953
+	Handle PointCloud Average Time: 0.00228119
+
+	Frame Number: 1363
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0536614
+	Read Points In Average Time: 0.0361049
+	Handle PointCloud Average Time: 0.00229389
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.566529
+	MESH-	PointCloud Size: 2408
+
+	Frame Number: 1369
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0539618
+	Read Points In Average Time: 0.0361001
+	Handle PointCloud Average Time: 0.00231301
+
+	Frame Number: 1373
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0540121
+	Read Points In Average Time: 0.0376272
+	Handle PointCloud Average Time: 0.0023227
+
+	Frame Number: 1374
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0539728
+	Read Points In Average Time: 0.0395608
+	Handle PointCloud Average Time: 0.00232435
+
+	Frame Number: 1410
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0525954
+	Read Points In Average Time: 0.0385629
+	Handle PointCloud Average Time: 0.00234646
+
+	Frame Number: 1435
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0520024
+	Read Points In Average Time: 0.0379271
+	Handle PointCloud Average Time: 0.00233877
+
+	Frame Number: 1445
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0521528
+	Read Points In Average Time: 0.0377472
+	Handle PointCloud Average Time: 0.00233968
+
+	Frame Number: 1456
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0521899
+	Read Points In Average Time: 0.0377172
+	Handle PointCloud Average Time: 0.00233954
+
+	Frame Number: 1466
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0524677
+	Read Points In Average Time: 0.0375175
+	Handle PointCloud Average Time: 0.00233005
+
+	Frame Number: 1472
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0528789
+	Read Points In Average Time: 0.0373845
+	Handle PointCloud Average Time: 0.00233677
+
+	Frame Number: 1477
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0533107
+	Read Points In Average Time: 0.0372923
+	Handle PointCloud Average Time: 0.00234423
+
+	Frame Number: 1486
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0535874
+	Read Points In Average Time: 0.0371053
+	Handle PointCloud Average Time: 0.00235679
+
+	Frame Number: 1494
+	Cloud Size: 2740
+	Read Num Points Average Time: 0.0538967
+	Read Points In Average Time: 0.0369383
+	Handle PointCloud Average Time: 0.00236955
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.585363
+	MESH-	PointCloud Size: 2427
+
+	Frame Number: 1504
+	Cloud Size: 2759
+	Read Num Points Average Time: 0.0540202
+	Read Points In Average Time: 0.0367257
+	Handle PointCloud Average Time: 0.00236616
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.546945
+	MESH-	PointCloud Size: 2428
+
+	Frame Number: 1514
+	Cloud Size: 2761
+	Read Num Points Average Time: 0.0540907
+	Read Points In Average Time: 0.0365821
+	Handle PointCloud Average Time: 0.00235476
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.542782
+	MESH-	PointCloud Size: 2432
+
+	Frame Number: 1521
+	Cloud Size: 2764
+	Read Num Points Average Time: 0.0540644
+	Read Points In Average Time: 0.0364587
+	Handle PointCloud Average Time: 0.00234693
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.576175
+	MESH-	PointCloud Size: 2432
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.561096
+	MESH-	PointCloud Size: 2444
+
+	Frame Number: 1533
+	Cloud Size: 2776
+	Read Num Points Average Time: 0.0540756
+	Read Points In Average Time: 0.0361977
+	Handle PointCloud Average Time: 0.00233523
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.592736
+	MESH-	PointCloud Size: 2445
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.632809
+	MESH-	PointCloud Size: 2446
+
+	Frame Number: 1541
+	Cloud Size: 2778
+	Read Num Points Average Time: 0.0537951
+	Read Points In Average Time: 0.0360111
+	Handle PointCloud Average Time: 0.00233366
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.623061
+	MESH-	PointCloud Size: 2446
+
+	Frame Number: 1560
+	Cloud Size: 2778
+	Read Num Points Average Time: 0.0532987
+	Read Points In Average Time: 0.0356095
+	Handle PointCloud Average Time: 0.00232272
+
+	Frame Number: 1570
+	Cloud Size: 2778
+	Read Num Points Average Time: 0.0534301
+	Read Points In Average Time: 0.035411
+	Handle PointCloud Average Time: 0.00231961
+
+	Frame Number: 1581
+	Cloud Size: 2778
+	Read Num Points Average Time: 0.0535523
+	Read Points In Average Time: 0.0351892
+	Handle PointCloud Average Time: 0.00231479
+
+	Frame Number: 1588
+	Cloud Size: 2778
+	Read Num Points Average Time: 0.0536903
+	Read Points In Average Time: 0.0352504
+	Handle PointCloud Average Time: 0.00231987
+
+	Frame Number: 1598
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0537491
+	Read Points In Average Time: 0.0351257
+	Handle PointCloud Average Time: 0.00233048
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.658352
+	MESH-	PointCloud Size: 2449
+
+	Frame Number: 1610
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0538682
+	Read Points In Average Time: 0.0349236
+	Handle PointCloud Average Time: 0.00234423
+
+	Frame Number: 1617
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0540606
+	Read Points In Average Time: 0.0349341
+	Handle PointCloud Average Time: 0.0023592
+
+	Frame Number: 1626
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0542531
+	Read Points In Average Time: 0.0347908
+	Handle PointCloud Average Time: 0.00236958
+
+	Frame Number: 1637
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0543216
+	Read Points In Average Time: 0.0346454
+	Handle PointCloud Average Time: 0.0023725
+
+	Frame Number: 1647
+	Cloud Size: 2781
+	Read Num Points Average Time: 0.0544906
+	Read Points In Average Time: 0.0344639
+	Handle PointCloud Average Time: 0.00237305
+
+	Frame Number: 1656
+	Cloud Size: 2940
+	Read Num Points Average Time: 0.0545756
+	Read Points In Average Time: 0.0343563
+	Handle PointCloud Average Time: 0.00238356
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.780201
+	MESH-	PointCloud Size: 2575
+
+	Frame Number: 1665
+	Cloud Size: 2940
+	Read Num Points Average Time: 0.0547486
+	Read Points In Average Time: 0.0342089
+	Handle PointCloud Average Time: 0.00239698
+
+	Frame Number: 1673
+	Cloud Size: 2940
+	Read Num Points Average Time: 0.0546679
+	Read Points In Average Time: 0.0343357
+	Handle PointCloud Average Time: 0.00240594
+
+	Frame Number: 1685
+	Cloud Size: 2940
+	Read Num Points Average Time: 0.0547758
+	Read Points In Average Time: 0.0341183
+	Handle PointCloud Average Time: 0.00241033
+
+	Frame Number: 1688
+	Cloud Size: 2940
+	Read Num Points Average Time: 0.0548271
+	Read Points In Average Time: 0.0353508
+	Handle PointCloud Average Time: 0.00241049
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.583822
+	MESH-	PointCloud Size: 2583
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.625042
+	MESH-	PointCloud Size: 2584
+
+	Frame Number: 1699
+	Cloud Size: 2951
+	Read Num Points Average Time: 0.0544724
+	Read Points In Average Time: 0.0351221
+	Handle PointCloud Average Time: 0.00240097
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.824157
+	MESH-	PointCloud Size: 2585
+
+	Frame Number: 1717
+	Cloud Size: 2952
+	Read Num Points Average Time: 0.0539017
+	Read Points In Average Time: 0.0347561
+	Handle PointCloud Average Time: 0.00239389
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.828838
+	MESH-	PointCloud Size: 2598
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.609452
+	MESH-	PointCloud Size: 2598
+
+	Frame Number: 1731
+	Cloud Size: 2965
+	Read Num Points Average Time: 0.0537934
+	Read Points In Average Time: 0.0345068
+	Handle PointCloud Average Time: 0.00241984
+
+	Frame Number: 1740
+	Cloud Size: 2965
+	Read Num Points Average Time: 0.0539863
+	Read Points In Average Time: 0.034396
+	Handle PointCloud Average Time: 0.00243834
+
+	Frame Number: 1746
+	Cloud Size: 2965
+	Read Num Points Average Time: 0.0542395
+	Read Points In Average Time: 0.0343819
+	Handle PointCloud Average Time: 0.00245479
+
+	Frame Number: 1751
+	Cloud Size: 2965
+	Read Num Points Average Time: 0.0543975
+	Read Points In Average Time: 0.0349084
+	Handle PointCloud Average Time: 0.00246794
+
+	Frame Number: 1761
+	Cloud Size: 2965
+	Read Num Points Average Time: 0.0540888
+	Read Points In Average Time: 0.0350437
+	Handle PointCloud Average Time: 0.0024805
+
+	Frame Number: 1777
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.053675
+	Read Points In Average Time: 0.0347347
+	Handle PointCloud Average Time: 0.0024902
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.691706
+	MESH-	PointCloud Size: 2676
+
+	Frame Number: 1789
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0537054
+	Read Points In Average Time: 0.0345356
+	Handle PointCloud Average Time: 0.00249594
+
+	Frame Number: 1797
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0539844
+	Read Points In Average Time: 0.0344033
+	Handle PointCloud Average Time: 0.00250688
+
+	Frame Number: 1805
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0542096
+	Read Points In Average Time: 0.0342719
+	Handle PointCloud Average Time: 0.00251837
+
+	Frame Number: 1816
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.054084
+	Read Points In Average Time: 0.0342591
+	Handle PointCloud Average Time: 0.00252024
+
+	Frame Number: 1824
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0540616
+	Read Points In Average Time: 0.0343239
+	Handle PointCloud Average Time: 0.00251733
+
+	Frame Number: 1832
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.054257
+	Read Points In Average Time: 0.0342038
+	Handle PointCloud Average Time: 0.00253119
+
+	Frame Number: 1840
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0543397
+	Read Points In Average Time: 0.0342074
+	Handle PointCloud Average Time: 0.0025438
+
+	Frame Number: 1848
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0545138
+	Read Points In Average Time: 0.0341627
+	Handle PointCloud Average Time: 0.00255969
+
+	Frame Number: 1857
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0547071
+	Read Points In Average Time: 0.0340396
+	Handle PointCloud Average Time: 0.00257253
+
+	Frame Number: 1865
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.054889
+	Read Points In Average Time: 0.0339457
+	Handle PointCloud Average Time: 0.00257813
+
+	Frame Number: 1875
+	Cloud Size: 3066
+	Read Num Points Average Time: 0.0549918
+	Read Points In Average Time: 0.0338653
+	Handle PointCloud Average Time: 0.00258252
+
+	Frame Number: 1885
+	Cloud Size: 3172
+	Read Num Points Average Time: 0.0550494
+	Read Points In Average Time: 0.0339455
+	Handle PointCloud Average Time: 0.00258914
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.608643
+	MESH-	PointCloud Size: 2769
+
+	Frame Number: 1894
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0548084
+	Read Points In Average Time: 0.0338825
+	Handle PointCloud Average Time: 0.00261335
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.679475
+	MESH-	PointCloud Size: 2769
+
+	Frame Number: 1897
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0548941
+	Read Points In Average Time: 0.0346379
+	Handle PointCloud Average Time: 0.00262091
+
+	Frame Number: 1917
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0543219
+	Read Points In Average Time: 0.0345236
+	Handle PointCloud Average Time: 0.00263892
+
+	Frame Number: 1926
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0545259
+	Read Points In Average Time: 0.0344393
+	Handle PointCloud Average Time: 0.00263358
+
+	Frame Number: 1935
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0547042
+	Read Points In Average Time: 0.0343031
+	Handle PointCloud Average Time: 0.00262765
+
+	Frame Number: 1944
+	Cloud Size: 3174
+	Read Num Points Average Time: 0.0549124
+	Read Points In Average Time: 0.034189
+	Handle PointCloud Average Time: 0.00263482
+
+	Frame Number: 1952
+	Cloud Size: 3186
+	Read Num Points Average Time: 0.0550178
+	Read Points In Average Time: 0.0341498
+	Handle PointCloud Average Time: 0.00264326
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.686464
+	MESH-	PointCloud Size: 2775
+
+	Frame Number: 1963
+	Cloud Size: 3186
+	Read Num Points Average Time: 0.055082
+	Read Points In Average Time: 0.0339906
+	Handle PointCloud Average Time: 0.00264521
+
+	Frame Number: 1970
+	Cloud Size: 3190
+	Read Num Points Average Time: 0.0553604
+	Read Points In Average Time: 0.0338926
+	Handle PointCloud Average Time: 0.00265019
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.598191
+	MESH-	PointCloud Size: 2780
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.628105
+	MESH-	PointCloud Size: 2787
+
+	Frame Number: 1977
+	Cloud Size: 3197
+	Read Num Points Average Time: 0.0551646
+	Read Points In Average Time: 0.0337727
+	Handle PointCloud Average Time: 0.00264413
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.619878
+	MESH-	PointCloud Size: 2803
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.636415
+	MESH-	PointCloud Size: 2804
+
+	Frame Number: 1984
+	Cloud Size: 3214
+	Read Num Points Average Time: 0.0549703
+	Read Points In Average Time: 0.0336545
+	Handle PointCloud Average Time: 0.00264459
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.804714
+	MESH-	PointCloud Size: 2808
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.614628
+	MESH-	PointCloud Size: 2808
+
+	Frame Number: 1991
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0547772
+	Read Points In Average Time: 0.0335387
+	Handle PointCloud Average Time: 0.00265213
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 1.00427
+	MESH-	PointCloud Size: 2808
+
+	Frame Number: 2017
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0541213
+	Read Points In Average Time: 0.0331105
+	Handle PointCloud Average Time: 0.00263254
+
+	Frame Number: 2027
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0542246
+	Read Points In Average Time: 0.0329747
+	Handle PointCloud Average Time: 0.00262525
+
+	Frame Number: 2037
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0543414
+	Read Points In Average Time: 0.0328632
+	Handle PointCloud Average Time: 0.0026174
+
+	Frame Number: 2046
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0545016
+	Read Points In Average Time: 0.0327341
+	Handle PointCloud Average Time: 0.00261095
+
+	Frame Number: 2054
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0546694
+	Read Points In Average Time: 0.0326581
+	Handle PointCloud Average Time: 0.00262218
+
+	Frame Number: 2065
+	Cloud Size: 3221
+	Read Num Points Average Time: 0.0547115
+	Read Points In Average Time: 0.0325844
+	Handle PointCloud Average Time: 0.00263199
+
+	Frame Number: 2076
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0547634
+	Read Points In Average Time: 0.0325255
+	Handle PointCloud Average Time: 0.00263685
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.678583
+	MESH-	PointCloud Size: 2851
+
+	Frame Number: 2088
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0547667
+	Read Points In Average Time: 0.0324338
+	Handle PointCloud Average Time: 0.00263171
+
+	Frame Number: 2098
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0548423
+	Read Points In Average Time: 0.0323599
+	Handle PointCloud Average Time: 0.00262631
+
+	Frame Number: 2109
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0549204
+	Read Points In Average Time: 0.0322142
+	Handle PointCloud Average Time: 0.00261952
+
+	Frame Number: 2120
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.055054
+	Read Points In Average Time: 0.0320654
+	Handle PointCloud Average Time: 0.00261375
+
+	Frame Number: 2130
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0552296
+	Read Points In Average Time: 0.0319536
+	Handle PointCloud Average Time: 0.00261097
+
+	Frame Number: 2140
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0553134
+	Read Points In Average Time: 0.0318963
+	Handle PointCloud Average Time: 0.00261964
+
+	Frame Number: 2148
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0554876
+	Read Points In Average Time: 0.0318248
+	Handle PointCloud Average Time: 0.00263234
+
+	Frame Number: 2156
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0556402
+	Read Points In Average Time: 0.0317999
+	Handle PointCloud Average Time: 0.00264608
+
+	Frame Number: 2163
+	Cloud Size: 3260
+	Read Num Points Average Time: 0.0558653
+	Read Points In Average Time: 0.0317166
+	Handle PointCloud Average Time: 0.00266061
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.658375
+	MESH-	PointCloud Size: 3082
+
+	Frame Number: 2168
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0561082
+	Read Points In Average Time: 0.0316581
+	Handle PointCloud Average Time: 0.00267293
+
+	Frame Number: 2174
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0563687
+	Read Points In Average Time: 0.0316136
+	Handle PointCloud Average Time: 0.0026891
+
+	Frame Number: 2183
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0564678
+	Read Points In Average Time: 0.0315327
+	Handle PointCloud Average Time: 0.0026998
+
+	Frame Number: 2194
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0565604
+	Read Points In Average Time: 0.0314013
+	Handle PointCloud Average Time: 0.00271
+
+	Frame Number: 2203
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0567028
+	Read Points In Average Time: 0.0312968
+	Handle PointCloud Average Time: 0.00271164
+
+	Frame Number: 2213
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0568515
+	Read Points In Average Time: 0.0311728
+	Handle PointCloud Average Time: 0.00270542
+
+	Frame Number: 2222
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0570028
+	Read Points In Average Time: 0.0310655
+	Handle PointCloud Average Time: 0.00270033
+
+	Frame Number: 2232
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0570897
+	Read Points In Average Time: 0.0309821
+	Handle PointCloud Average Time: 0.00270241
+
+	Frame Number: 2243
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0571355
+	Read Points In Average Time: 0.0308985
+	Handle PointCloud Average Time: 0.00270662
+
+	Frame Number: 2253
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0572145
+	Read Points In Average Time: 0.0307941
+	Handle PointCloud Average Time: 0.00271187
+
+	Frame Number: 2263
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0573085
+	Read Points In Average Time: 0.0306792
+	Handle PointCloud Average Time: 0.00271512
+
+	Frame Number: 2273
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0573926
+	Read Points In Average Time: 0.0305735
+	Handle PointCloud Average Time: 0.0027211
+
+	Frame Number: 2281
+	Cloud Size: 3543
+	Read Num Points Average Time: 0.0575245
+	Read Points In Average Time: 0.0305264
+	Handle PointCloud Average Time: 0.00273234
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.674612
+	MESH-	PointCloud Size: 3191
+
+	Frame Number: 2289
+	Cloud Size: 3649
+	Read Num Points Average Time: 0.0576655
+	Read Points In Average Time: 0.0305242
+	Handle PointCloud Average Time: 0.00273662
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.577342
+	MESH-	PointCloud Size: 3193
+
+	Frame Number: 2297
+	Cloud Size: 3651
+	Read Num Points Average Time: 0.0575432
+	Read Points In Average Time: 0.0304222
+	Handle PointCloud Average Time: 0.00273871
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.60352
+	MESH-	PointCloud Size: 3194
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.606632
+	MESH-	PointCloud Size: 3196
+
+	Frame Number: 2303
+	Cloud Size: 3654
+	Read Num Points Average Time: 0.0573935
+	Read Points In Average Time: 0.030343
+	Handle PointCloud Average Time: 0.00273385
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.598363
+	MESH-	PointCloud Size: 3197
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.592056
+	MESH-	PointCloud Size: 3198
+
+	Frame Number: 2305
+	Cloud Size: 3656
+	Read Num Points Average Time: 0.0573437
+	Read Points In Average Time: 0.0303168
+	Handle PointCloud Average Time: 0.00273338
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.640215
+	MESH-	PointCloud Size: 3200
+
+	Frame Number: 2323
+	Cloud Size: 3659
+	Read Num Points Average Time: 0.0568997
+	Read Points In Average Time: 0.030085
+	Handle PointCloud Average Time: 0.002741
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 1.0126
+	MESH-	PointCloud Size: 3200
+
+	Frame Number: 2343
+	Cloud Size: 3659
+	Read Num Points Average Time: 0.0566263
+	Read Points In Average Time: 0.0298428
+	Handle PointCloud Average Time: 0.00274065
+
+	Frame Number: 2352
+	Cloud Size: 3659
+	Read Num Points Average Time: 0.0567342
+	Read Points In Average Time: 0.0298067
+	Handle PointCloud Average Time: 0.00274576
+/////////TOTALS (END OF RUN)/////////
+	Total Run Time: 269.872
+	Total Frames Recieved: 2363
+	Cloud Size: 3659
