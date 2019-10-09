@@ -22,9 +22,15 @@
 #include <pcl/features/normal_3d_omp.h>
 #include <pcl/kdtree/kdtree_flann.h>
 #include <pcl/surface/poisson.h>
+#include <pcl/surface/vtk_smoothing/vtk_mesh_smoothing_laplacian.h>
+#include <pcl/surface/vtk_smoothing/vtk_mesh_quadric_decimation.h>
+
 //IO
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/vtk_io.h>
+#include <pcl/io/vtk_lib_io.h>
+
+
 //Visualize
 #include <pcl/visualization/pcl_visualizer.h>
 #include <time.h> 
@@ -125,6 +131,44 @@ void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, 
 		Logfile.close();
 		}
 
+void vtkSmooth(int iter, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr smoothedMesh){
+        pcl::MeshSmoothingLaplacianVTK vtk;
+        vtk.setInputMesh(mesh);
+        vtk.setNumIter(20);
+        vtk.setRelaxationFactor(0.1);      
+    	vtk.setFeatureEdgeSmoothing(false);
+    	vtk.setBoundarySmoothing(true);
+        vtk.process(*smoothedMesh);
+}
+
+
+void vtkDec(float rFac, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr decMesh){
+        pcl::MeshQuadricDecimationVTK dec;
+        dec.setInputMesh(mesh);
+        dec.setTargetReductionFactor(rFac);
+        dec.process(*decMesh);
+}
+
+bool saveFiles(string timeString, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr decMesh, pcl::PolygonMesh::Ptr smoothedMesh, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud){
+	string folName = "./"+timeString;
+	std::string ptString = folName + "//points.pcd";
+	std::string pointString = folName + "//PointsFilt.pcd";
+  	std::string meshString = folName + "//mesh.vtk";
+  	std::string meshString2 = folName + "//model.stl";
+  	std::string meshString3 = folName + "//decMesh.vtk";
+  	std::string meshString4 = folName + "//smoothedMesh.vtk";
+  	std::string meshString5 = folName + "//smoothedMesh.stl";
+
+	pcl::io::savePCDFile (pointString, *cloud_point_normals);
+	pcl::io::savePCDFile (ptString, *cloud);
+	pcl::io::saveVTKFile (meshString, *mesh);
+	pcl::io::saveVTKFile (meshString3, *decMesh);
+	pcl::io::saveVTKFile (meshString4, *smoothedMesh);
+	pcl::io::savePolygonFileSTL(meshString2, *mesh, true);
+	pcl::io::savePolygonFileSTL(meshString5, *smoothedMesh, true);
+
+	return (true);
+}
 
 int
 main (int argc, char** argv)
@@ -146,6 +190,8 @@ main (int argc, char** argv)
 	pcl::PointCloud<pcl::PointNormal>::Ptr preMesh (new pcl::PointCloud<pcl::PointNormal> ());
 	pcl::PolygonMesh::Ptr mesh (new pcl::PolygonMesh());
 	pcl::PolygonMesh::Ptr updateMesh (new pcl::PolygonMesh());
+	pcl::PolygonMesh::Ptr smoothedMesh (new pcl::PolygonMesh());
+	pcl::PolygonMesh::Ptr decMesh (new pcl::PolygonMesh());
 
 	pcl::io::loadPCDFile ("points.pcd", *cloud);
 
@@ -178,6 +224,11 @@ main (int argc, char** argv)
 	int ftStart = 250;
 	double totalTime = 0;
 	double end_time_total = 0;
+	int iter = 20;
+	pcl::console::parse_argument (argc, argv, "-it", iter);
+
+	float rFac = 0.9;
+	pcl::console::parse_argument (argc, argv, "-rFac", rFac);
 
 	pcl::console::parse_argument (argc, argv, "-ft", ftStart);
 
@@ -215,6 +266,10 @@ main (int argc, char** argv)
 	///////MESHING////////////
 	int depth = 6;
 	pcl::console::parse_argument (argc, argv, "-d", depth);
+
+	////////////// THREADS AVAILABLE /////////////
+  	unsigned int nthreads = boost::thread::hardware_concurrency();
+  	cout << "Number of Threads Available: " << nthreads << endl;
 
 	time_t rawtime;
   	struct tm * timeinfo;
@@ -262,6 +317,8 @@ main (int argc, char** argv)
   	Logfile << "\tNormal Estimation Search Radius: " << neRad << endl;
   	Logfile << "\n/////////POISSON MESHING/////////" << endl;
     Logfile << "\tPoisson Depth: " << depth << endl;
+    Logfile << "\n///////// MESH Smoothing/////////" << endl;
+    Logfile << "\tIterations: " << iter << endl;
     Logfile << "\n\n/////////START RUN/////////" << endl;
     Logfile.close();
 
@@ -366,6 +423,9 @@ main (int argc, char** argv)
 			//	boost::thread meshThread(meshReconstruct, depth, preMesh, mesh, updateMesh);
 			//	meshReconstruct(depth, preMesh, mesh, updateMesh);
 				meshThread = boost::thread(meshReconstruct, depth, preMesh, mesh, updateMesh, LogName);
+				////////////// THREADS AVAILABLE /////////////
+  				unsigned int nthreads2 = boost::thread::hardware_concurrency();
+  				cout << "Number of Threads Available After Starting Mesh: " << nthreads2 << endl;
 				end_time = pcl::getTime ();
 				elapsed_Mesh = end_time - start_time;
 				meshINT++;
@@ -376,6 +436,16 @@ main (int argc, char** argv)
 		{
 		meshThread.join();
 		}
+
+
+		pcl::io::loadPolygonFileVTK("mesh.vtk", *mesh);
+		start_time = pcl::getTime();
+		vtkDec(rFac, mesh, decMesh);
+		vtkSmooth(iter, decMesh, smoothedMesh);
+		end_time = pcl::getTime ();
+		elapsed_Mesh = end_time - start_time;
+		cout << "Smoothing took: " << elapsed_Mesh << " Seconds." << endl;
+
 	int m(0);
 	int pN(0);
 	int p(0);
@@ -384,25 +454,25 @@ main (int argc, char** argv)
 	viewer = boost::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer");
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
 //	viewer->setCameraPosition(0.156407, 0.590266, -1.05477, cR[0], cR[1], cR[2], 0,1,0);
-	viewer->createViewPort (0.0, 0.0, 0.25, 1.0, m);
-	viewer->createViewPort (0.26, 0.0, 0.5, 1.0, pN);
-	viewer->createViewPort (0.51, 0.0, 0.75, 1.0, pT);
-	viewer->createViewPort (0.76, 0.0, 1.0, 1.0, p);
-	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0);
+	viewer->createViewPort (0.0, 0.0, 0.33, 1.0, m);
+	//viewer->createViewPort (0.26, 0.0, 0.5, 1.0, pN);
+	viewer->createViewPort (0.34, 0.0, 0.66, 1.0, pT);
+	viewer->createViewPort (0.67, 0.0, 1.0, 1.0, p);
 //	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0,pN);
 //	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0,pN);
 	viewer->addPolygonMesh(*mesh,"Poisson",m);
 	viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output",pN);
 	viewer->addPointCloud<pcl::PointXYZ> (cloud, "pts",p);
-	viewer->addPointCloud<pcl::PointXYZ> (cloud_downsampled, "ptsTemp",pT);
+	viewer->addPolygonMesh(*smoothedMesh,"SmoothedPoisson",pT);
 //	viewer->addPointCloudNormals<pcl::PointNormal, pcl::Normal> (preMesh, normals, 10, 0.05, "normals");
   	viewer->setBackgroundColor (0, 0, 0);
-  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"Output");
+//  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"Output");
   	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"pts");
-  	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"ptsTemp");
+ // 	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3,"ptsTemp");
 //  viewer->setCameraFieldOfView(0.523599);
 //  viewer->setCameraClipDistances(0.00522511, 50);
 //  	viewer->setCameraPosition(0.156407, 0.590266, -1.05477, cR[0], cR[1], cR[2], 0,1,0);
+  	viewer->setCameraPosition(1.80495, 0.684705, -1.34932, cR[0], cR[1], cR[2], 0,1,0);
   	viewer->initCameraParameters ();
   	double new_time = pcl::getTime ();
     elapsed_time = new_time - start_time_master;
@@ -426,11 +496,9 @@ main (int argc, char** argv)
         ////////////////////////////////////////////////////
     //    meshThread.join();
 
-//    pcl::io::savePCDFile ("Points.pcd", *cloud);
-    pcl::io::savePCDFile (pointString, *preMesh);
-    pcl::io::savePCDFile (ptString, *cloud);
-    pcl::io::saveVTKFile (meshString, *mesh);
-    pcl::io::savePolygonFileSTL(meshString2, *mesh, true);
+    if(saveFiles(timeString, mesh, decMesh, smoothedMesh, preMesh, cloud)){
+	  	cout << "Succesfully Saved 7 Files to " << folName << "." << endl;
+	  		}
     //WRITE TO FILE
     Logfile.open(LogName, ios::out | ios::app );
     Logfile << "\n\n/////////TOTALS (END OF RUN)/////////" << endl;
