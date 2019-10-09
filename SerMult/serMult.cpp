@@ -121,14 +121,15 @@ void statOutlier (int mK, double stdDev, pcl::PointCloud<pcl::PointXYZ>::Ptr clo
 }
 
 //void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
-void meshReconstruct(string LogName, int depth, pcl::PointCloud<pcl::PointNormal>::Ptr preMesh, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh){
+void meshReconstruct(string LogName, int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh){
 	double start_time = pcl::getTime();
 	pcl::Poisson<pcl::PointNormal> poisson;
 	poisson.setDepth(depth);
-	poisson.setInputCloud(preMesh);
-	poisson.reconstruct(*updateMesh);
 	boost::mutex::scoped_lock updateLock(updateModelMutex);
+	poisson.setInputCloud(cloud_point_normals);
+	poisson.reconstruct(*updateMesh);
 	*mesh = *updateMesh;
+	cout << "FINISHED MESH" << endl;
 	update = true;
 	double end_time = pcl::getTime ();
 	double meshTime = end_time - start_time;
@@ -136,9 +137,10 @@ void meshReconstruct(string LogName, int depth, pcl::PointCloud<pcl::PointNormal
 	Logfile.open(LogName, ios::out | ios::app );
 	Logfile << "\n/////////MESHING/////////" << endl;
 	Logfile << "\tMESH-\tMesh Time: " << meshTime << endl;
-	Logfile << "\tMESH-\tPointCloud Size: " << preMesh->points.size() << endl;
+	Logfile << "\tMESH-\tPointCloud Size: " << cloud_point_normals->points.size() << endl;
 	Logfile.close();
-		}
+	updateLock.unlock();
+}
 
 void vtkSmooth(int iter, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr smoothedMesh){
     pcl::MeshSmoothingLaplacianVTK vtk;
@@ -236,7 +238,7 @@ void readPoints(int port, string LogName, boost::shared_ptr<string> pointString,
 	readLock.unlock();
 
 	waitFlag = false;
-
+	double start_time = pcl::getTime();
   	while(!exitFlag){
     	//numPoints = 0;
   		data = "";
@@ -310,6 +312,16 @@ void readPoints(int port, string LogName, boost::shared_ptr<string> pointString,
 		*pointString = pointStringTemp;
 		newPoints = true;
 		readLock.unlock();
+
+		double new_time = pcl::getTime ();
+        double elapsed_time = new_time - start_time;
+        if (elapsed_time > 5.0)
+        {       
+        	double fps = track / elapsed_time;
+        	start_time = new_time;
+        	track = 0;
+          	cout << "\tREAD POINTS FPS: " << fps << endl;
+		}
 	}
 }
 
@@ -695,8 +707,10 @@ main (int argc, char** argv)
 			if(update || meshINT == 0){	
 				if (meshINT > 0){
 					start_time = pcl::getTime();
+					cout << "- STARTED SMOOTHING" << endl;
 					vtkDec(rFac, mesh, decMesh);
 					vtkSmooth(iter, decMesh, smoothedMesh);
+					cout << "- FINISHED SMOOTHING" << endl;
 					end_time = pcl::getTime ();
 					elapsed_Mesh = end_time - start_time;
 					cout << "Smoothing took: " << elapsed_Mesh << " Seconds." << endl;
@@ -721,12 +735,9 @@ main (int argc, char** argv)
 					elapsed_Mesh = end_time - start_time;
 					cout << "PAUSE-\tWaited for: " << elapsed_Mesh << " seconds" << endl;
 					cout << "PAUSE-\tPointCloud Size: " << cloudSize_new << endl;
-				}
-				start_time = pcl::getTime();
-	
+				}	
 				meshThread = boost::thread(meshReconstruct, LogName, depth, cloud_point_normals, mesh, updateMesh);
-				end_time = pcl::getTime ();
-				elapsed_Mesh = end_time - start_time;
+				cout << "STARTED MESH" << endl;
 				meshINT++;
 			}
 		}
