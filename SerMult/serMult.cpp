@@ -120,28 +120,6 @@ void statOutlier (int mK, double stdDev, pcl::PointCloud<pcl::PointXYZ>::Ptr clo
 	sor.filter(*preMesh);
 }
 
-//void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
-void meshReconstruct(string LogName, int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh){
-	double start_time = pcl::getTime();
-	pcl::Poisson<pcl::PointNormal> poisson;
-	poisson.setDepth(depth);
-	boost::mutex::scoped_lock updateLock(updateModelMutex);
-	poisson.setInputCloud(cloud_point_normals);
-	poisson.reconstruct(*updateMesh);
-	*mesh = *updateMesh;
-	cout << "FINISHED MESH" << endl;
-	update = true;
-	double end_time = pcl::getTime ();
-	double meshTime = end_time - start_time;
-	ofstream Logfile;
-	Logfile.open(LogName, ios::out | ios::app );
-	Logfile << "\n/////////MESHING/////////" << endl;
-	Logfile << "\tMESH-\tMesh Time: " << meshTime << endl;
-	Logfile << "\tMESH-\tPointCloud Size: " << cloud_point_normals->points.size() << endl;
-	Logfile.close();
-	updateLock.unlock();
-}
-
 void vtkSmooth(int iter, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr smoothedMesh){
     pcl::MeshSmoothingLaplacianVTK vtk;
     vtk.setInputMesh(mesh);
@@ -159,6 +137,36 @@ void vtkDec(float rFac, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr decMes
     dec.process(*decMesh);
 }
 
+//void meshReconstruct(int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh){
+void meshReconstruct(float rFac, int iter, string LogName, int depth, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr updateMesh, pcl::PolygonMesh::Ptr smoothedMesh){
+	double start_time = pcl::getTime();
+	pcl::PolygonMesh::Ptr decMesh (new pcl::PolygonMesh());
+	pcl::Poisson<pcl::PointNormal> poisson;
+	poisson.setDepth(depth);
+	boost::mutex::scoped_lock updateLock(updateModelMutex);
+	poisson.setInputCloud(cloud_point_normals);
+	poisson.reconstruct(*updateMesh);
+	//*mesh = *updateMesh;
+	cout << "FINISHED MESH" << endl;
+
+	cout << "- STARTED SMOOTHING" << endl;
+	vtkDec(rFac, updateMesh, decMesh);
+	vtkSmooth(iter, decMesh, smoothedMesh);
+	cout << "- FINISHED SMOOTHING" << endl;
+	*mesh = *updateMesh;
+	update = true;
+	double end_time = pcl::getTime ();
+	double meshTime = end_time - start_time;
+	ofstream Logfile;
+	Logfile.open(LogName, ios::out | ios::app );
+	Logfile << "\n/////////MESHING/////////" << endl;
+	Logfile << "\tMESH-\tMesh Time: " << meshTime << endl;
+	Logfile << "\tMESH-\tPointCloud Size: " << cloud_point_normals->points.size() << endl;
+	Logfile.close();
+	updateLock.unlock();
+}
+
+
 bool saveFiles(string timeString, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::Ptr decMesh, pcl::PolygonMesh::Ptr smoothedMesh, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_point_normals, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud){
 	string folName = "./"+timeString;
 	std::string ptString = folName + "//points.pcd";
@@ -172,7 +180,7 @@ bool saveFiles(string timeString, pcl::PolygonMesh::Ptr mesh, pcl::PolygonMesh::
 	pcl::io::savePCDFile (pointString, *cloud_point_normals);
 	pcl::io::savePCDFile (ptString, *cloud);
 	pcl::io::saveVTKFile (meshString, *mesh);
-	pcl::io::saveVTKFile (meshString3, *decMesh);
+//	pcl::io::saveVTKFile (meshString3, *decMesh);
 	pcl::io::saveVTKFile (meshString4, *smoothedMesh);
 	pcl::io::savePolygonFileSTL(meshString2, *mesh, true);
 	pcl::io::savePolygonFileSTL(meshString5, *smoothedMesh, true);
@@ -222,7 +230,7 @@ void readPoints(int port, string LogName, boost::shared_ptr<string> pointString,
 	std::stringstream ssNum(data);
 	ssNum >> *numPoints;
 
-	cout << "NumPoints after assignment = " << *numPoints << endl;
+//	cout << "NumPoints after assignment = " << *numPoints << endl;
 
 
 // Read Points From Socket
@@ -233,7 +241,7 @@ void readPoints(int port, string LogName, boost::shared_ptr<string> pointString,
 	}
 	std::getline(is, *pointString);
 
-	cout << *pointString << endl;
+//	cout << *pointString << endl;
 
 	readLock.unlock();
 
@@ -446,7 +454,7 @@ main (int argc, char** argv)
 
 	//////////MESH SMOOTHING/////////
 	int iter = 20;
-	float rFac = 0.9;
+	float rFac = 0.6;
 	pcl::console::parse_argument (argc, argv, "-it", iter);
 	pcl::console::parse_argument (argc, argv, "-rFac", rFac);
 
@@ -632,6 +640,26 @@ main (int argc, char** argv)
 		{
 			//////////// REMOVE  OUTLIERS ////////////
 			start_time = pcl::getTime();
+			if (cloud->points.size() < 1000){
+				mK = cloud->points.size();
+				stdDev = 1.5;
+			}
+
+			if (cloud->points.size() > 1000){
+				mK = 400;
+				stdDev = 1.4;
+			}
+
+			if (cloud->points.size() > 2000){
+				mK = 300;
+				stdDev = 1.2;
+			}
+
+			if (cloud->points.size() > 3000){
+				mK = 200;
+				stdDev = 1;
+			}
+
 			statOutlier(mK,stdDev, cloud, cloud_downsampled);
 			end_time = pcl::getTime ();
 			double elapsed_Stat = end_time - start_time;
@@ -644,6 +672,19 @@ main (int argc, char** argv)
 	 			/// CLEAR POINT CLOUDS /////
 	 			cloud_downsampled2->width = cloud_downsampled2->height = 0;
 	 			cloud_downsampled2->clear();
+
+	 			if (cloud->points.size() > 1000){
+				radDown = 0.1;
+				minNei = 5;
+				}
+				if (cloud->points.size() > 2000){
+				radDown = 0.075;
+				minNei = 7;
+				}
+				if (cloud->points.size() > 3000){
+				radDown = 0.05;
+				minNei = 10;
+				}
 
 				FilterPoints(radDown, minNei, cloud_downsampled, cloud_downsampled2);
 	 			end_time = pcl::getTime ();
@@ -705,16 +746,7 @@ main (int argc, char** argv)
 			////////////////////////////////////
 
 			if(update || meshINT == 0){	
-				if (meshINT > 0){
-					start_time = pcl::getTime();
-					cout << "- STARTED SMOOTHING" << endl;
-					vtkDec(rFac, mesh, decMesh);
-					vtkSmooth(iter, decMesh, smoothedMesh);
-					cout << "- FINISHED SMOOTHING" << endl;
-					end_time = pcl::getTime ();
-					elapsed_Mesh = end_time - start_time;
-					cout << "Smoothing took: " << elapsed_Mesh << " Seconds." << endl;
-				}
+
 				viewer->removeAllPointClouds();
 				pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
 			//	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 255, 255, 255);
@@ -736,7 +768,7 @@ main (int argc, char** argv)
 					cout << "PAUSE-\tWaited for: " << elapsed_Mesh << " seconds" << endl;
 					cout << "PAUSE-\tPointCloud Size: " << cloudSize_new << endl;
 				}	
-				meshThread = boost::thread(meshReconstruct, LogName, depth, cloud_point_normals, mesh, updateMesh);
+				meshThread = boost::thread(meshReconstruct,rFac, iter, LogName, depth, cloud_point_normals, mesh, updateMesh, smoothedMesh);
 				cout << "STARTED MESH" << endl;
 				meshINT++;
 			}

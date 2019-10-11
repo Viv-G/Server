@@ -12,6 +12,21 @@ MLS
 	- LINEAR, INSTEAD OF 2ND ORDER
 
 
+TO DO:
+	- Remove Plane visualizer after good plane found
+	- ASYNC send points, or run on different thread
+	- Improve filtering
+	- Remove prefab, just set anchor?
+	- Upsampling?
+
+
+	- Downsampling
+
+	- RGB values of point cloud
+
+	- Export image for photogrammetry + pose
+	
+	- Texture Mesh
 
 
 v1 - 
@@ -46,3 +61,21 @@ NO FILTERING
 
 
 Sweetspot around 0.6 confidence
+
+ARGS
+-port p :: set the server port (default: 11111)
+-ft ftStart :: Set the number of points to start filtering at
+-rD radDown :: Set the radius for Radius Outlier Removal (Default 0.05)
+-mNei minNei :: Set the minimum neighbours for Radius Outlier Removal (Default 40)
+-rad rad :: Set the search radius for MLS Smoothing (Default 0.04)
+-nr, neRad :: Set the search radius for Normal Estimation (Default 0.04)
+-std, stdDev :: Set the standard deviation multiplier for the statistical outlier removal
+-mK, mK :: Set the number of nearest neighbours for statistical outlier removal
+
+pcl::console::parse_argument (argc, argv, "-ft", ftStart);
+pcl::console::parse_argument (argc, argv, "-rD", radDown);
+pcl::console::parse_argument (argc, argv, "-mNei", minNei);
+pcl::console::parse_argument (argc, argv, "-rad", rad);
+pcl::console::parse_argument (argc, argv, "-nr", neRad);
+pcl::console::parse_argument (argc, argv, "-std", stdDev);
+pcl::console::parse_argument (argc, argv, "-mK", mK);
