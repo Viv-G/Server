@@ -16,6 +16,7 @@
 //Filters
 #include <pcl/filters/radius_outlier_removal.h>
 #include <pcl/filters/statistical_outlier_removal.h>
+#include <pcl/filters/voxel_grid.h>
 
 //Surfaces
 #include <pcl/surface/mls.h>
@@ -24,6 +25,10 @@
 #include <pcl/surface/poisson.h>
 #include <pcl/surface/vtk_smoothing/vtk_mesh_smoothing_laplacian.h>
 #include <pcl/surface/vtk_smoothing/vtk_mesh_quadric_decimation.h>
+
+// Plane fitting
+#include <pcl/ModelCoefficients.h>
+#include <pcl/filters/project_inliers.h>
 
 //IO
 #include <pcl/io/pcd_io.h>
@@ -71,6 +76,26 @@ void FilterPoints(double radDown, int minNei, pcl::PointCloud<pcl::PointXYZ>::Pt
  r_rem.setMinNeighborsInRadius(minNei);
  r_rem.filter (*cloud_downsampled);
 }
+
+void projPts(pcl::ModelCoefficients::Ptr coefficients, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_projected){
+	pcl::ProjectInliers<pcl::PointXYZ> proj;
+	proj.setModelType (pcl::SACMODEL_PLANE);
+	proj.setInputCloud (cloud_downsampled);
+	proj.setModelCoefficients (coefficients);
+	proj.filter (*cloud_projected);
+}
+
+void voxFilter(float vLeaf, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_projected, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_base_filtered){
+  // create filter instance
+ 	pcl::VoxelGrid<pcl::PointXYZ> vox;
+ // set input cloud
+ 	vox.setInputCloud (cloud_projected);
+ // set cell/voxel size to vLeaf meters in each dimension
+ 	vox.setLeafSize (vLeaf, vLeaf, vLeaf);
+  // do filtering
+ 	vox.filter (*cloud_base_filtered);
+}
+
 
 void MLS(double rad, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_downsampled, pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points){
 	// Init object (second point type is for the normals, even if unused)
@@ -385,6 +410,7 @@ main (int argc, char** argv)
 			/////////////////////////////////////// 
 
 
+
 			/////////////MLS SMOOTHING////////////
 	 		start_time = pcl::getTime();
 	 		//// CLEAR POINT CLOUDS /////
@@ -438,7 +464,7 @@ main (int argc, char** argv)
 		}
 
 
-		pcl::io::loadPolygonFileVTK("mesh.vtk", *mesh);
+//./m		pcl::io::loadPolygonFileVTK("mesh.vtk", *mesh);
 		start_time = pcl::getTime();
 		vtkDec(rFac, mesh, decMesh);
 		vtkSmooth(iter, decMesh, smoothedMesh);
