@@ -1,0 +1,52 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 182
+	Cloud Size: 27
+
+	Frame Number: 361
+	Cloud Size: 47
+
+	Frame Number: 543
+	Cloud Size: 79
+
+	Frame Number: 722
+	Cloud Size: 79
+
+	Frame Number: 904
+	Cloud Size: 79
+
+	Frame Number: 1083
+	Cloud Size: 79
+
+	Frame Number: 1263
+	Cloud Size: 79
+
+	Frame Number: 1445
+	Cloud Size: 79
+
+	Frame Number: 1620
+	Cloud Size: 79
+
+	Frame Number: 1800
+	Cloud Size: 79
+
+	Frame Number: 1980
+	Cloud Size: 79

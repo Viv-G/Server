@@ -1,0 +1,141 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.499724
+	MESH-	PointCloud Size: 230
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.482211
+	MESH-	PointCloud Size: 279
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.501898
+	MESH-	PointCloud Size: 313
+
+	Frame Number: 173
+	Cloud Size: 205
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.495494
+	MESH-	PointCloud Size: 328
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.521078
+	MESH-	PointCloud Size: 330
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.523534
+	MESH-	PointCloud Size: 339
+
+	Frame Number: 347
+	Cloud Size: 226
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.496553
+	MESH-	PointCloud Size: 341
+
+	Frame Number: 530
+	Cloud Size: 226
+
+	Frame Number: 774
+	Cloud Size: 226
+
+	Frame Number: 976
+	Cloud Size: 226
+
+	Frame Number: 1156
+	Cloud Size: 226
+
+	Frame Number: 1330
+	Cloud Size: 226
+
+	Frame Number: 1515
+	Cloud Size: 226
+
+	Frame Number: 1694
+	Cloud Size: 226
+
+	Frame Number: 1871
+	Cloud Size: 226
+
+	Frame Number: 2046
+	Cloud Size: 226
+
+	Frame Number: 2230
+	Cloud Size: 226
+
+	Frame Number: 2411
+	Cloud Size: 226
+
+	Frame Number: 2591
+	Cloud Size: 226
+
+	Frame Number: 2774
+	Cloud Size: 226
+
+	Frame Number: 2954
+	Cloud Size: 226
+
+	Frame Number: 3135
+	Cloud Size: 226
+
+	Frame Number: 3323
+	Cloud Size: 226
+
+	Frame Number: 3514
+	Cloud Size: 226
+
+	Frame Number: 3694
+	Cloud Size: 226
+
+	Frame Number: 3876
+	Cloud Size: 226
+
+	Frame Number: 4055
+	Cloud Size: 226
+
+	Frame Number: 4236
+	Cloud Size: 226
+
+	Frame Number: 4418
+	Cloud Size: 226
+
+	Frame Number: 4600
+	Cloud Size: 226
+
+	Frame Number: 4613
+	Cloud Size: 226
+
+	Frame Number: 4645
+	Cloud Size: 226
+
+	Frame Number: 4834
+	Cloud Size: 226
+
+	Frame Number: 5014
+	Cloud Size: 226
+
+	Frame Number: 5193
+	Cloud Size: 226
+/////////TOTALS (END OF RUN)/////////
+	Total Run Time: 158.85
+	Total Frames Recieved: 5289
+	Cloud Size: 226

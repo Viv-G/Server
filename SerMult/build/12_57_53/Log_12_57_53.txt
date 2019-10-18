@@ -1,0 +1,112 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 180
+	Cloud Size: 83
+
+	Frame Number: 354
+	Cloud Size: 83
+
+	Frame Number: 517
+	Cloud Size: 83
+
+	Frame Number: 697
+	Cloud Size: 83
+
+	Frame Number: 879
+	Cloud Size: 83
+
+	Frame Number: 1056
+	Cloud Size: 83
+
+	Frame Number: 1129
+	Cloud Size: 83
+
+	Frame Number: 1131
+	Cloud Size: 83
+
+	Frame Number: 1133
+	Cloud Size: 83
+
+	Frame Number: 1134
+	Cloud Size: 83
+
+	Frame Number: 1137
+	Cloud Size: 83
+
+	Frame Number: 1139
+	Cloud Size: 83
+
+	Frame Number: 1140
+	Cloud Size: 83
+
+	Frame Number: 1147
+	Cloud Size: 83
+
+	Frame Number: 1305
+	Cloud Size: 83
+
+	Frame Number: 1484
+	Cloud Size: 83
+
+	Frame Number: 1667
+	Cloud Size: 83
+
+	Frame Number: 1849
+	Cloud Size: 83
+
+	Frame Number: 2026
+	Cloud Size: 83
+
+	Frame Number: 2206
+	Cloud Size: 83
+
+	Frame Number: 2383
+	Cloud Size: 83
+
+	Frame Number: 2426
+	Cloud Size: 83
+
+	Frame Number: 2589
+	Cloud Size: 83
+
+	Frame Number: 2766
+	Cloud Size: 83
+
+	Frame Number: 2944
+	Cloud Size: 83
+
+	Frame Number: 3125
+	Cloud Size: 83
+
+	Frame Number: 3167
+	Cloud Size: 83
+
+	Frame Number: 3205
+	Cloud Size: 83
+
+	Frame Number: 3206
+	Cloud Size: 83
+
+	Frame Number: 3272
+	Cloud Size: 83
+
+	Frame Number: 3280
+	Cloud Size: 83

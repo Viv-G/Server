@@ -473,7 +473,6 @@ main (int argc, char** argv)
   	string pointStringRun = "";
 
 
-
 	/////////////FILENAME SETUP/////////////////
 	time_t rawtime;
   	struct tm * timeinfo;
@@ -549,9 +548,9 @@ main (int argc, char** argv)
 
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 	viewer = boost::make_shared<pcl::visualization::PCLVisualizer>( "Point Cloud Viewer");
-	viewer->createViewPort (0.0, 0.0, 0.5, 1.0, pN);
-	//viewer->createViewPort (0.34, 0.0, 0.66, 1.0, m);
-	viewer->createViewPort (0.5, 0.0, 1.0, 1.0, p);
+	viewer->createViewPort (0.0, 0.0, 0.33, 1.0, pN);
+	viewer->createViewPort (0.34, 0.0, 0.66, 1.0, m);
+	viewer->createViewPort (0.67, 0.0, 1.0, 1.0, p);
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(cloud, 0, 255, 0);
   	viewer->setBackgroundColor (0, 0, 0);
   	viewer->addPointCloud<pcl::PointXYZ> (cloud, "pts",p);
@@ -750,7 +749,7 @@ main (int argc, char** argv)
 				viewer->removeAllPointClouds();
 				pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
 			//	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 255, 255, 255);
-	    		//viewer->addPolygonMesh(*mesh,"Poisson",m);
+	    		viewer->addPolygonMesh(*mesh,"Poisson",m);
 	    		viewer->addPolygonMesh(*smoothedMesh,"Smoothed Mesh",p);
 	    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output", pN);
 	  		//	viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "pts", p);
@@ -855,6 +854,8 @@ main (int argc, char** argv)
         ////////////////////////////////////////////////////
     //    meshThread.join();
 	}
+
+
 
 	if(saveFiles(timeString, mesh, decMesh, smoothedMesh, cloud_point_normals, cloud)){
 	  	cout << "Succesfully Saved 7 Files to " << folName << "." << endl;

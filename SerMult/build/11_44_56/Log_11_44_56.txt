@@ -1,0 +1,301 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.547831
+	MESH-	PointCloud Size: 301
+
+	Frame Number: 184
+	Cloud Size: 264
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.663186
+	MESH-	PointCloud Size: 427
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.791115
+	MESH-	PointCloud Size: 649
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.638637
+	MESH-	PointCloud Size: 651
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.526137
+	MESH-	PointCloud Size: 774
+
+	Frame Number: 359
+	Cloud Size: 481
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.664034
+	MESH-	PointCloud Size: 762
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.792648
+	MESH-	PointCloud Size: 768
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.635911
+	MESH-	PointCloud Size: 900
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.842085
+	MESH-	PointCloud Size: 952
+
+	Frame Number: 530
+	Cloud Size: 616
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.691664
+	MESH-	PointCloud Size: 954
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.744317
+	MESH-	PointCloud Size: 993
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.544294
+	MESH-	PointCloud Size: 996
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.533395
+	MESH-	PointCloud Size: 1049
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.709824
+	MESH-	PointCloud Size: 1088
+
+	Frame Number: 696
+	Cloud Size: 710
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.589523
+	MESH-	PointCloud Size: 1128
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.662312
+	MESH-	PointCloud Size: 1129
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.662998
+	MESH-	PointCloud Size: 1169
+
+	Frame Number: 872
+	Cloud Size: 759
+
+	Frame Number: 1052
+	Cloud Size: 759
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.553063
+	MESH-	PointCloud Size: 1224
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.608491
+	MESH-	PointCloud Size: 1209
+
+	Frame Number: 1219
+	Cloud Size: 788
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.650354
+	MESH-	PointCloud Size: 1210
+
+	Frame Number: 1399
+	Cloud Size: 788
+
+	Frame Number: 1577
+	Cloud Size: 788
+
+	Frame Number: 1756
+	Cloud Size: 788
+
+	Frame Number: 1938
+	Cloud Size: 788
+
+	Frame Number: 1977
+	Cloud Size: 788
+
+	Frame Number: 1978
+	Cloud Size: 788
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.770791
+	MESH-	PointCloud Size: 1233
+
+	Frame Number: 1979
+	Cloud Size: 792
+
+	Frame Number: 1980
+	Cloud Size: 792
+
+	Frame Number: 1981
+	Cloud Size: 792
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.810563
+	MESH-	PointCloud Size: 1269
+
+	Frame Number: 1982
+	Cloud Size: 793
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.764787
+	MESH-	PointCloud Size: 1237
+
+	Frame Number: 1983
+	Cloud Size: 798
+
+	Frame Number: 1984
+	Cloud Size: 798
+
+	Frame Number: 1985
+	Cloud Size: 798
+
+	Frame Number: 1987
+	Cloud Size: 798
+
+	Frame Number: 1991
+	Cloud Size: 798
+
+	Frame Number: 1992
+	Cloud Size: 798
+
+	Frame Number: 1993
+	Cloud Size: 798
+
+	Frame Number: 1994
+	Cloud Size: 798
+
+	Frame Number: 1995
+	Cloud Size: 798
+
+	Frame Number: 1996
+	Cloud Size: 798
+
+	Frame Number: 1997
+	Cloud Size: 798
+
+	Frame Number: 1998
+	Cloud Size: 798
+
+	Frame Number: 1999
+	Cloud Size: 798
+
+	Frame Number: 2000
+	Cloud Size: 798
+
+	Frame Number: 2001
+	Cloud Size: 798
+
+	Frame Number: 2002
+	Cloud Size: 798
+
+	Frame Number: 2003
+	Cloud Size: 798
+
+	Frame Number: 2004
+	Cloud Size: 798
+
+	Frame Number: 2005
+	Cloud Size: 798
+
+	Frame Number: 2006
+	Cloud Size: 798
+
+	Frame Number: 2007
+	Cloud Size: 798
+
+	Frame Number: 2008
+	Cloud Size: 798
+
+	Frame Number: 2009
+	Cloud Size: 798
+
+	Frame Number: 2010
+	Cloud Size: 798
+
+	Frame Number: 2011
+	Cloud Size: 798
+
+	Frame Number: 2012
+	Cloud Size: 798
+
+	Frame Number: 2013
+	Cloud Size: 798
+
+	Frame Number: 2014
+	Cloud Size: 798
+
+	Frame Number: 2015
+	Cloud Size: 798
+
+	Frame Number: 2016
+	Cloud Size: 798
+
+	Frame Number: 2017
+	Cloud Size: 798
+
+	Frame Number: 2018
+	Cloud Size: 798
+
+	Frame Number: 2019
+	Cloud Size: 798
+
+	Frame Number: 2020
+	Cloud Size: 798
+
+	Frame Number: 2021
+	Cloud Size: 798
+
+	Frame Number: 2022
+	Cloud Size: 798
+
+	Frame Number: 2023
+	Cloud Size: 798
+
+	Frame Number: 2024
+	Cloud Size: 798
+
+	Frame Number: 2025
+	Cloud Size: 798
+
+	Frame Number: 2026
+	Cloud Size: 798
+
+	Frame Number: 2027
+	Cloud Size: 798
+
+	Frame Number: 2028
+	Cloud Size: 798
+
+	Frame Number: 2029
+	Cloud Size: 798
+
+	Frame Number: 2030
+	Cloud Size: 798
+
+	Frame Number: 2035
+	Cloud Size: 798
+/////////TOTALS (END OF RUN)/////////
+	Total Run Time: 692.609
+	Total Frames Recieved: 2128
+	Cloud Size: 798

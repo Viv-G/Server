@@ -1,0 +1,358 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 179
+	Cloud Size: 47
+
+	Frame Number: 354
+	Cloud Size: 51
+
+	Frame Number: 1212
+	Cloud Size: 52
+
+	Frame Number: 2386
+	Cloud Size: 52
+
+	Frame Number: 3531
+	Cloud Size: 52
+
+	Frame Number: 4716
+	Cloud Size: 52
+
+	Frame Number: 5997
+	Cloud Size: 52
+
+	Frame Number: 7279
+	Cloud Size: 52
+
+	Frame Number: 8527
+	Cloud Size: 52
+
+	Frame Number: 9820
+	Cloud Size: 52
+
+	Frame Number: 11108
+	Cloud Size: 52
+
+	Frame Number: 12371
+	Cloud Size: 52
+
+	Frame Number: 13640
+	Cloud Size: 52
+
+	Frame Number: 14923
+	Cloud Size: 52
+
+	Frame Number: 14982
+	Cloud Size: 52
+
+	Frame Number: 14983
+	Cloud Size: 52
+
+	Frame Number: 14984
+	Cloud Size: 52
+
+	Frame Number: 14985
+	Cloud Size: 52
+
+	Frame Number: 14986
+	Cloud Size: 52
+
+	Frame Number: 14987
+	Cloud Size: 52
+
+	Frame Number: 14988
+	Cloud Size: 52
+
+	Frame Number: 14989
+	Cloud Size: 52
+
+	Frame Number: 14990
+	Cloud Size: 52
+
+	Frame Number: 14991
+	Cloud Size: 52
+
+	Frame Number: 14992
+	Cloud Size: 52
+
+	Frame Number: 14995
+	Cloud Size: 52
+
+	Frame Number: 14996
+	Cloud Size: 52
+
+	Frame Number: 15282
+	Cloud Size: 52
+
+	Frame Number: 15286
+	Cloud Size: 52
+
+	Frame Number: 15287
+	Cloud Size: 52
+
+	Frame Number: 15288
+	Cloud Size: 52
+
+	Frame Number: 15289
+	Cloud Size: 52
+
+	Frame Number: 15290
+	Cloud Size: 52
+
+	Frame Number: 15291
+	Cloud Size: 52
+
+	Frame Number: 15292
+	Cloud Size: 52
+
+	Frame Number: 15293
+	Cloud Size: 52
+
+	Frame Number: 15294
+	Cloud Size: 52
+
+	Frame Number: 15302
+	Cloud Size: 52
+
+	Frame Number: 15303
+	Cloud Size: 52
+
+	Frame Number: 15304
+	Cloud Size: 52
+
+	Frame Number: 15305
+	Cloud Size: 52
+
+	Frame Number: 15306
+	Cloud Size: 52
+
+	Frame Number: 15307
+	Cloud Size: 52
+
+	Frame Number: 15308
+	Cloud Size: 52
+
+	Frame Number: 15309
+	Cloud Size: 52
+
+	Frame Number: 15310
+	Cloud Size: 52
+
+	Frame Number: 15311
+	Cloud Size: 52
+
+	Frame Number: 15312
+	Cloud Size: 52
+
+	Frame Number: 15313
+	Cloud Size: 52
+
+	Frame Number: 15314
+	Cloud Size: 52
+
+	Frame Number: 15315
+	Cloud Size: 52
+
+	Frame Number: 15316
+	Cloud Size: 52
+
+	Frame Number: 15317
+	Cloud Size: 52
+
+	Frame Number: 15318
+	Cloud Size: 52
+
+	Frame Number: 15319
+	Cloud Size: 52
+
+	Frame Number: 15320
+	Cloud Size: 52
+
+	Frame Number: 15321
+	Cloud Size: 52
+
+	Frame Number: 15322
+	Cloud Size: 52
+
+	Frame Number: 15323
+	Cloud Size: 52
+
+	Frame Number: 15324
+	Cloud Size: 52
+
+	Frame Number: 15325
+	Cloud Size: 52
+
+	Frame Number: 15326
+	Cloud Size: 52
+
+	Frame Number: 15327
+	Cloud Size: 52
+
+	Frame Number: 15328
+	Cloud Size: 52
+
+	Frame Number: 15329
+	Cloud Size: 52
+
+	Frame Number: 15330
+	Cloud Size: 52
+
+	Frame Number: 15331
+	Cloud Size: 52
+
+	Frame Number: 15332
+	Cloud Size: 52
+
+	Frame Number: 15333
+	Cloud Size: 52
+
+	Frame Number: 15334
+	Cloud Size: 52
+
+	Frame Number: 15335
+	Cloud Size: 52
+
+	Frame Number: 15336
+	Cloud Size: 52
+
+	Frame Number: 15337
+	Cloud Size: 52
+
+	Frame Number: 15338
+	Cloud Size: 52
+
+	Frame Number: 15339
+	Cloud Size: 52
+
+	Frame Number: 15340
+	Cloud Size: 52
+
+	Frame Number: 15341
+	Cloud Size: 52
+
+	Frame Number: 15342
+	Cloud Size: 52
+
+	Frame Number: 15343
+	Cloud Size: 52
+
+	Frame Number: 15344
+	Cloud Size: 52
+
+	Frame Number: 15345
+	Cloud Size: 52
+
+	Frame Number: 15346
+	Cloud Size: 52
+
+	Frame Number: 15347
+	Cloud Size: 52
+
+	Frame Number: 15348
+	Cloud Size: 52
+
+	Frame Number: 15349
+	Cloud Size: 52
+
+	Frame Number: 15350
+	Cloud Size: 52
+
+	Frame Number: 15351
+	Cloud Size: 52
+
+	Frame Number: 15352
+	Cloud Size: 52
+
+	Frame Number: 15353
+	Cloud Size: 52
+
+	Frame Number: 15354
+	Cloud Size: 52
+
+	Frame Number: 15355
+	Cloud Size: 52
+
+	Frame Number: 15356
+	Cloud Size: 52
+
+	Frame Number: 15357
+	Cloud Size: 52
+
+	Frame Number: 15358
+	Cloud Size: 52
+
+	Frame Number: 15363
+	Cloud Size: 52
+
+	Frame Number: 15534
+	Cloud Size: 52
+
+	Frame Number: 15714
+	Cloud Size: 52
+
+	Frame Number: 15892
+	Cloud Size: 52
+
+	Frame Number: 16067
+	Cloud Size: 52
+
+	Frame Number: 16241
+	Cloud Size: 52
+
+	Frame Number: 16418
+	Cloud Size: 52
+
+	Frame Number: 16597
+	Cloud Size: 52
+
+	Frame Number: 16761
+	Cloud Size: 52
+
+	Frame Number: 16955
+	Cloud Size: 52
+
+	Frame Number: 17145
+	Cloud Size: 52
+
+	Frame Number: 17328
+	Cloud Size: 52
+
+	Frame Number: 17522
+	Cloud Size: 52
+
+	Frame Number: 17710
+	Cloud Size: 52
+
+	Frame Number: 17897
+	Cloud Size: 52
+
+	Frame Number: 17948
+	Cloud Size: 52
+
+	Frame Number: 17949
+	Cloud Size: 52
+
+	Frame Number: 18003
+	Cloud Size: 52
+
+	Frame Number: 18005
+	Cloud Size: 52

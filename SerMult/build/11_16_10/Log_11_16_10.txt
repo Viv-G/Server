@@ -1,0 +1,580 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 181
+	Cloud Size: 75
+
+	Frame Number: 356
+	Cloud Size: 114
+
+	Frame Number: 532
+	Cloud Size: 134
+
+	Frame Number: 713
+	Cloud Size: 134
+
+	Frame Number: 897
+	Cloud Size: 143
+
+	Frame Number: 1075
+	Cloud Size: 144
+
+	Frame Number: 1255
+	Cloud Size: 147
+
+	Frame Number: 1430
+	Cloud Size: 147
+
+	Frame Number: 1608
+	Cloud Size: 147
+
+	Frame Number: 1789
+	Cloud Size: 147
+
+	Frame Number: 1969
+	Cloud Size: 147
+
+	Frame Number: 2147
+	Cloud Size: 147
+
+	Frame Number: 2325
+	Cloud Size: 147
+
+	Frame Number: 2506
+	Cloud Size: 147
+
+	Frame Number: 2690
+	Cloud Size: 147
+
+	Frame Number: 2869
+	Cloud Size: 147
+
+	Frame Number: 3048
+	Cloud Size: 147
+
+	Frame Number: 3228
+	Cloud Size: 147
+
+	Frame Number: 3336
+	Cloud Size: 147
+
+	Frame Number: 3337
+	Cloud Size: 147
+
+	Frame Number: 3338
+	Cloud Size: 147
+
+	Frame Number: 3339
+	Cloud Size: 147
+
+	Frame Number: 3340
+	Cloud Size: 147
+
+	Frame Number: 3341
+	Cloud Size: 147
+
+	Frame Number: 3342
+	Cloud Size: 147
+
+	Frame Number: 3343
+	Cloud Size: 147
+
+	Frame Number: 3344
+	Cloud Size: 147
+
+	Frame Number: 3345
+	Cloud Size: 147
+
+	Frame Number: 3346
+	Cloud Size: 147
+
+	Frame Number: 3348
+	Cloud Size: 147
+
+	Frame Number: 3352
+	Cloud Size: 147
+
+	Frame Number: 3514
+	Cloud Size: 147
+
+	Frame Number: 3699
+	Cloud Size: 147
+
+	Frame Number: 3877
+	Cloud Size: 147
+
+	Frame Number: 4056
+	Cloud Size: 147
+
+	Frame Number: 4236
+	Cloud Size: 147
+
+	Frame Number: 4414
+	Cloud Size: 147
+
+	Frame Number: 4592
+	Cloud Size: 147
+
+	Frame Number: 4770
+	Cloud Size: 147
+
+	Frame Number: 4946
+	Cloud Size: 147
+
+	Frame Number: 5129
+	Cloud Size: 147
+
+	Frame Number: 5306
+	Cloud Size: 147
+
+	Frame Number: 5484
+	Cloud Size: 147
+
+	Frame Number: 5525
+	Cloud Size: 147
+
+	Frame Number: 5528
+	Cloud Size: 147
+
+	Frame Number: 5530
+	Cloud Size: 147
+
+	Frame Number: 5531
+	Cloud Size: 147
+
+	Frame Number: 5532
+	Cloud Size: 147
+
+	Frame Number: 5533
+	Cloud Size: 147
+
+	Frame Number: 5534
+	Cloud Size: 147
+
+	Frame Number: 5535
+	Cloud Size: 147
+
+	Frame Number: 5537
+	Cloud Size: 147
+
+	Frame Number: 5538
+	Cloud Size: 147
+
+	Frame Number: 5539
+	Cloud Size: 147
+
+	Frame Number: 5540
+	Cloud Size: 147
+
+	Frame Number: 5541
+	Cloud Size: 147
+
+	Frame Number: 5542
+	Cloud Size: 147
+
+	Frame Number: 5544
+	Cloud Size: 147
+
+	Frame Number: 5545
+	Cloud Size: 147
+
+	Frame Number: 5546
+	Cloud Size: 147
+
+	Frame Number: 5548
+	Cloud Size: 147
+
+	Frame Number: 5602
+	Cloud Size: 147
+
+	Frame Number: 5606
+	Cloud Size: 147
+
+	Frame Number: 5610
+	Cloud Size: 147
+
+	Frame Number: 5611
+	Cloud Size: 147
+
+	Frame Number: 5614
+	Cloud Size: 147
+
+	Frame Number: 5617
+	Cloud Size: 147
+
+	Frame Number: 5619
+	Cloud Size: 147
+
+	Frame Number: 5624
+	Cloud Size: 147
+
+	Frame Number: 5625
+	Cloud Size: 147
+
+	Frame Number: 5627
+	Cloud Size: 147
+
+	Frame Number: 5631
+	Cloud Size: 147
+
+	Frame Number: 5632
+	Cloud Size: 147
+
+	Frame Number: 5634
+	Cloud Size: 147
+
+	Frame Number: 5639
+	Cloud Size: 147
+
+	Frame Number: 5641
+	Cloud Size: 147
+
+	Frame Number: 5643
+	Cloud Size: 147
+
+	Frame Number: 5646
+	Cloud Size: 147
+
+	Frame Number: 5648
+	Cloud Size: 147
+
+	Frame Number: 5654
+	Cloud Size: 147
+
+	Frame Number: 5657
+	Cloud Size: 147
+
+	Frame Number: 5660
+	Cloud Size: 147
+
+	Frame Number: 5661
+	Cloud Size: 147
+
+	Frame Number: 5663
+	Cloud Size: 147
+
+	Frame Number: 5665
+	Cloud Size: 147
+
+	Frame Number: 5667
+	Cloud Size: 147
+
+	Frame Number: 5672
+	Cloud Size: 147
+
+	Frame Number: 5676
+	Cloud Size: 147
+
+	Frame Number: 5679
+	Cloud Size: 147
+
+	Frame Number: 5681
+	Cloud Size: 147
+
+	Frame Number: 5685
+	Cloud Size: 147
+
+	Frame Number: 5687
+	Cloud Size: 147
+
+	Frame Number: 5691
+	Cloud Size: 147
+
+	Frame Number: 5694
+	Cloud Size: 147
+
+	Frame Number: 5699
+	Cloud Size: 147
+
+	Frame Number: 5700
+	Cloud Size: 147
+
+	Frame Number: 5701
+	Cloud Size: 147
+
+	Frame Number: 5702
+	Cloud Size: 147
+
+	Frame Number: 5703
+	Cloud Size: 147
+
+	Frame Number: 5706
+	Cloud Size: 147
+
+	Frame Number: 5708
+	Cloud Size: 147
+
+	Frame Number: 5711
+	Cloud Size: 147
+
+	Frame Number: 5715
+	Cloud Size: 147
+
+	Frame Number: 5717
+	Cloud Size: 147
+
+	Frame Number: 5721
+	Cloud Size: 147
+
+	Frame Number: 5722
+	Cloud Size: 147
+
+	Frame Number: 5725
+	Cloud Size: 147
+
+	Frame Number: 5774
+	Cloud Size: 147
+
+	Frame Number: 5776
+	Cloud Size: 147
+
+	Frame Number: 5787
+	Cloud Size: 147
+
+	Frame Number: 5788
+	Cloud Size: 147
+
+	Frame Number: 5791
+	Cloud Size: 147
+
+	Frame Number: 5795
+	Cloud Size: 147
+
+	Frame Number: 5828
+	Cloud Size: 147
+
+	Frame Number: 5879
+	Cloud Size: 147
+
+	Frame Number: 5880
+	Cloud Size: 147
+
+	Frame Number: 5883
+	Cloud Size: 147
+
+	Frame Number: 5884
+	Cloud Size: 147
+
+	Frame Number: 5885
+	Cloud Size: 147
+
+	Frame Number: 5886
+	Cloud Size: 147
+
+	Frame Number: 5887
+	Cloud Size: 147
+
+	Frame Number: 5888
+	Cloud Size: 147
+
+	Frame Number: 5889
+	Cloud Size: 147
+
+	Frame Number: 5890
+	Cloud Size: 147
+
+	Frame Number: 5892
+	Cloud Size: 147
+
+	Frame Number: 5893
+	Cloud Size: 147
+
+	Frame Number: 5896
+	Cloud Size: 147
+
+	Frame Number: 5897
+	Cloud Size: 147
+
+	Frame Number: 5943
+	Cloud Size: 147
+
+	Frame Number: 5947
+	Cloud Size: 147
+
+	Frame Number: 5948
+	Cloud Size: 147
+
+	Frame Number: 5949
+	Cloud Size: 147
+
+	Frame Number: 5950
+	Cloud Size: 147
+
+	Frame Number: 5952
+	Cloud Size: 147
+
+	Frame Number: 5953
+	Cloud Size: 147
+
+	Frame Number: 5954
+	Cloud Size: 147
+
+	Frame Number: 5955
+	Cloud Size: 147
+
+	Frame Number: 5956
+	Cloud Size: 147
+
+	Frame Number: 5958
+	Cloud Size: 147
+
+	Frame Number: 5959
+	Cloud Size: 147
+
+	Frame Number: 5960
+	Cloud Size: 147
+
+	Frame Number: 5961
+	Cloud Size: 147
+
+	Frame Number: 5962
+	Cloud Size: 147
+
+	Frame Number: 5963
+	Cloud Size: 147
+
+	Frame Number: 5964
+	Cloud Size: 147
+
+	Frame Number: 5965
+	Cloud Size: 147
+
+	Frame Number: 5968
+	Cloud Size: 147
+
+	Frame Number: 5972
+	Cloud Size: 147
+
+	Frame Number: 5975
+	Cloud Size: 147
+
+	Frame Number: 5976
+	Cloud Size: 147
+
+	Frame Number: 5977
+	Cloud Size: 147
+
+	Frame Number: 5978
+	Cloud Size: 147
+
+	Frame Number: 5980
+	Cloud Size: 147
+
+	Frame Number: 5981
+	Cloud Size: 147
+
+	Frame Number: 5982
+	Cloud Size: 147
+
+	Frame Number: 5985
+	Cloud Size: 147
+
+	Frame Number: 5987
+	Cloud Size: 147
+
+	Frame Number: 5991
+	Cloud Size: 147
+
+	Frame Number: 5993
+	Cloud Size: 147
+
+	Frame Number: 5995
+	Cloud Size: 147
+
+	Frame Number: 5996
+	Cloud Size: 147
+
+	Frame Number: 5998
+	Cloud Size: 147
+
+	Frame Number: 6001
+	Cloud Size: 147
+
+	Frame Number: 6004
+	Cloud Size: 147
+
+	Frame Number: 6006
+	Cloud Size: 147
+
+	Frame Number: 6010
+	Cloud Size: 147
+
+	Frame Number: 6012
+	Cloud Size: 147
+
+	Frame Number: 6017
+	Cloud Size: 147
+
+	Frame Number: 6018
+	Cloud Size: 147
+
+	Frame Number: 6019
+	Cloud Size: 147
+
+	Frame Number: 6020
+	Cloud Size: 147
+
+	Frame Number: 6022
+	Cloud Size: 147
+
+	Frame Number: 6026
+	Cloud Size: 147
+
+	Frame Number: 6029
+	Cloud Size: 147
+
+	Frame Number: 6200
+	Cloud Size: 147
+
+	Frame Number: 6381
+	Cloud Size: 147
+
+	Frame Number: 6565
+	Cloud Size: 147
+
+	Frame Number: 6742
+	Cloud Size: 147
+
+	Frame Number: 6918
+	Cloud Size: 147
+
+	Frame Number: 7097
+	Cloud Size: 147
+
+	Frame Number: 7276
+	Cloud Size: 147
+
+	Frame Number: 7440
+	Cloud Size: 147
+
+	Frame Number: 7441
+	Cloud Size: 147
+
+	Frame Number: 7442
+	Cloud Size: 147
+
+	Frame Number: 7443
+	Cloud Size: 147
+
+	Frame Number: 7444
+	Cloud Size: 147
+
+	Frame Number: 7578
+	Cloud Size: 147
