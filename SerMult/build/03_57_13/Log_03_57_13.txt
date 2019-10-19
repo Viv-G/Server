@@ -1,0 +1,63 @@
+/////////RADIUS OUTLIER REMOVAL/////////
+	Radius: 0.05
+	Min Nearest Neighbors: 10
+
+/////////STATISTICAL OUTLIER REMOVAL/////////
+	Standard Deviation Multiplier: 1
+	Nearest Neighbors: 200
+/////////VOX FILTER/////////
+	Leaf Size: 0.01
+
+/////////SMOOTHING & NORMAL ESTIMATION/////////
+	MLS Search Radius: 0.04
+	Normal Estimation Search Radius: 0.08
+
+/////////POISSON MESHING/////////
+	Poisson Depth: 6
+
+
+/////////START RUN/////////
+
+	Frame Number: 181
+	Cloud Size: 77
+
+	Frame Number: 360
+	Cloud Size: 92
+
+	Frame Number: 534
+	Cloud Size: 113
+
+	Frame Number: 713
+	Cloud Size: 113
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.489887
+	MESH-	PointCloud Size: 321
+
+	Frame Number: 891
+	Cloud Size: 270
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.478718
+	MESH-	PointCloud Size: 291
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.467882
+	MESH-	PointCloud Size: 692
+
+	Frame Number: 1067
+	Cloud Size: 520
+
+/////////MESHING/////////
+	MESH-	Mesh Time: 0.520408
+	MESH-	PointCloud Size: 742
+
+	Frame Number: 1242
+	Cloud Size: 557
+
+	Frame Number: 1420
+	Cloud Size: 557
+/////////TOTALS (END OF RUN)/////////
+	Total Run Time: 44.2939
+	Total Frames Recieved: 1563
+	Cloud Size: 557

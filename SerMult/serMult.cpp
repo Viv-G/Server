@@ -93,6 +93,17 @@ void voxFilter(float vLeaf, pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_projected,
  	vox.filter (*cloud_base_filtered);
 }
 
+void voxFilterNormal(float vLeaf, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_projected, pcl::PointCloud<pcl::PointNormal>::Ptr cloud_base_filtered){
+  // create filter instance
+ 	pcl::VoxelGrid<pcl::PointNormal> vox;
+ // set input cloud
+ 	vox.setInputCloud (cloud_projected);
+ // set cell/voxel size to vLeaf meters in each dimension
+ 	vox.setLeafSize (vLeaf, vLeaf, vLeaf);
+  // do filtering
+ 	vox.filter (*cloud_base_filtered);
+}
+
 void estNormals(double neRad, pcl::PointCloud<pcl::PointXYZ>::Ptr mls_points, pcl::PointCloud<pcl::Normal>::Ptr cloud_normals){
 	pcl::NormalEstimationOMP<pcl::PointXYZ, pcl::Normal> ne;
 	ne.setNumberOfThreads (2);
@@ -419,7 +430,7 @@ main (int argc, char** argv)
 	double totalTime = 0;
 	double end_time_total = 0;
 
-	int ptStart = 150;
+	int ptStart = 10;
 	int ftStart = 1000;
 	pcl::console::parse_argument (argc, argv, "-ft", ftStart);
 
@@ -435,7 +446,7 @@ main (int argc, char** argv)
 	pcl::console::parse_argument (argc, argv, "-vLeaf", vLeaf);
 
 	///////MLS///////
-	double rad = 0.04;
+	double rad = 0.02;
 	pcl::console::parse_argument (argc, argv, "-rad", rad);
 
 	///////Normal Estimation///////
@@ -457,6 +468,8 @@ main (int argc, char** argv)
 	float rFac = 0.6;
 	pcl::console::parse_argument (argc, argv, "-it", iter);
 	pcl::console::parse_argument (argc, argv, "-rFac", rFac);
+
+	bool justMeshed = false;
 
 
 	////////PLANE EQUATION/////////
@@ -627,8 +640,9 @@ main (int argc, char** argv)
 		cloud->width = (uint32_t) cloud->points.size();
 		cloudSize_new = cloud->points.size();
 		rep = 0;
-		Eigen::Vector4f centroid;
-		compute3DCentroid(*cloud, centroid);
+
+		/*Eigen::Vector4f centroid;
+		compute3DCentroid(*cloud, centroid); */
 
 		double new_time_Handle = pcl::getTime();
 		elapsed_time = new_time_Handle -start_time_Handle;
@@ -642,22 +656,22 @@ main (int argc, char** argv)
 			start_time = pcl::getTime();
 			if (cloud->points.size() < 1000){
 				mK = cloud->points.size();
-				stdDev = 1.5;
+				stdDev = 2;
 			}
 
 			if (cloud->points.size() > 1000){
-				mK = 400;
-				stdDev = 1.4;
+				mK = 600;
+				stdDev = 1.6;
 			}
 
 			if (cloud->points.size() > 2000){
-				mK = 300;
+				mK = 400;
 				stdDev = 1.2;
 			}
 
 			if (cloud->points.size() > 3000){
-				mK = 200;
-				stdDev = 1;
+				mK = 1000;
+				stdDev = 1.4;
 			}
 
 			statOutlier(mK,stdDev, cloud, cloud_downsampled);
@@ -673,10 +687,9 @@ main (int argc, char** argv)
 	 			cloud_downsampled2->width = cloud_downsampled2->height = 0;
 	 			cloud_downsampled2->clear();
 
-	 			if (cloud->points.size() > 1000){
-				radDown = 0.1;
+				radDown = 0.075;
 				minNei = 5;
-				}
+				
 				if (cloud->points.size() > 2000){
 				radDown = 0.075;
 				minNei = 7;
@@ -725,7 +738,8 @@ main (int argc, char** argv)
 	 		//// CLEAR POINT CLOUDS /////
 	 	 	mls_points->width = mls_points->height = 0;
 	 		mls_points->clear();
-	 		MLS(rad, cloud_base_filtered, mls_points);
+	 		MLS(rad, cloud_base_filtered, cloudTemp);
+	 		MLS(rad, cloudTemp, mls_points);
 		  	end_time = pcl::getTime ();
 		  	elapsed_mlsNoNormal = end_time - start_time;
 			//////////////////////////////////////
@@ -744,22 +758,25 @@ main (int argc, char** argv)
 			end_time = pcl::getTime ();
 			elapsed_Normal = end_time - start_time;
 			////////////////////////////////////
+			Eigen::Vector4f centroid;
+			compute3DCentroid(*cloud, centroid);
+
+			voxFilterNormal(vLeaf,cloud_point_normals, preMesh);
 
 			if(update || meshINT == 0){	
 
 				viewer->removeAllPointClouds();
-				pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
+				pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
 			//	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 255, 255, 255);
 	    		//viewer->addPolygonMesh(*mesh,"Poisson",m);
 	    		viewer->addPolygonMesh(*smoothedMesh,"Smoothed Mesh",p);
-	    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output", pN);
+	    		viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output", pN);
 	  		//	viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "pts", p);
 	  			viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"Output");
 	     	//	viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"pts");
 	  			viewer->setCameraPosition(camPos[0],camPos[1],camPos[2], centroid[0], centroid[1], centroid[2], 0,1,0);
 	  			viewer->spinOnce();
 	  			update = false;
-
 				if(meshThread.joinable())
 				{	start_time = pcl::getTime();
 					meshThread.join();
@@ -768,7 +785,8 @@ main (int argc, char** argv)
 					cout << "PAUSE-\tWaited for: " << elapsed_Mesh << " seconds" << endl;
 					cout << "PAUSE-\tPointCloud Size: " << cloudSize_new << endl;
 				}	
-				meshThread = boost::thread(meshReconstruct,rFac, iter, LogName, depth, cloud_point_normals, mesh, updateMesh, smoothedMesh);
+				//meshThread = boost::thread(meshReconstruct,rFac, iter, LogName, depth, cloud_point_normals, mesh, updateMesh, smoothedMesh);
+				meshThread = boost::thread(meshReconstruct,rFac, iter, LogName, depth, preMesh, mesh, updateMesh, smoothedMesh);
 				cout << "STARTED MESH" << endl;
 				meshINT++;
 			}
@@ -802,8 +820,8 @@ main (int argc, char** argv)
 			if (cloud->points.size() > ptStart )
 			{ 
 			viewer->removePointCloud("Output");
-			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(cloud_point_normals, 0, 255, 0);
-    		viewer->addPointCloud<pcl::PointNormal> (cloud_point_normals, single_color, "Output", pN);
+			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointNormal> single_color(preMesh, 0, 255, 0);
+    		viewer->addPointCloud<pcl::PointNormal> (preMesh, single_color, "Output", pN);
 
 		//	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 255, 255, 255);
   		//	viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "pts", p);
@@ -816,7 +834,10 @@ main (int argc, char** argv)
   			viewer->removePointCloud("pts");	
   			pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color2(cloud, 0, 255, 0);
   			viewer->addPointCloud<pcl::PointXYZ> (cloud, single_color2, "pts", p);
+  			viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4,"pts");
   			}
+  			// viewer->setCameraPosition(camPos[0],camPos[1],camPos[2], centroid[0], centroid[1], centroid[2], 0,1,0);
+	 		//viewer->spinOnce();
 		}
 
      	viewer->setCameraPosition(camPos[0],camPos[1],camPos[2], centroid[0], centroid[1], centroid[2], 0,1,0);
